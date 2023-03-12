@@ -8,7 +8,7 @@ import React from 'react';
 
 const Layout = () => {
   return (
-    <Box width="100%" height="97vh">
+    <Box width="100%">
       <Box
         height="100%"
         display="flex"
@@ -18,7 +18,7 @@ const Layout = () => {
       >
         <Header />
         <Main />
-        <Footer />
+        {/* <Footer /> */}
       </Box>
     </Box>
   );

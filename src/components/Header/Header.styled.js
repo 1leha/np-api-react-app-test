@@ -43,6 +43,8 @@ export const StyledHeaderTabs = styled.div`
 `;
 
 export const StyledTab = styled(NavLink)`
+  position: relative;
+
   width: 100%;
   height: 30px;
   transform-origin: 0 bottom 0;
@@ -71,6 +73,16 @@ export const StyledTab = styled(NavLink)`
 
   transition: ${p => p.theme.transitions.standart};
 
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+
+    bottom: -3px;
+    left: 0;
+  }
+
   &.active {
     cursor: default;
     font-weight: ${p => p.theme.fontWeights.bold};
@@ -87,5 +99,17 @@ export const StyledTab = styled(NavLink)`
     border-top-right-radius: ${p => p.theme.radii.standart};
 
     border-color: ${p => p.theme.colors.primaryLight};
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 3px;
+
+      bottom: -3px;
+      left: 0;
+
+      background-color: ${p => p.theme.colors.secondary};
+    }
   }
 `;
