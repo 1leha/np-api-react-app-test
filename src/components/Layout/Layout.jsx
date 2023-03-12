@@ -6,9 +6,9 @@ import React from 'react';
 
 // import PropTypes from 'prop-types'
 
-const Layout = ({ children }) => {
+const Layout = () => {
   return (
-    <Box width="100%" height="98vh">
+    <Box width="100%">
       <Box
         height="100%"
         display="flex"
@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
       >
         <Header />
         <Main />
-        <Footer />
+        {/* <Footer /> */}
       </Box>
     </Box>
   );

@@ -1,13 +1,14 @@
 import Container from 'components/common/Container';
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { StyledMain, StyledMainContent } from './Main.styled';
 // import PropTypes from 'prop-types'
 
-const Main = props => {
+const Main = () => {
   return (
     <StyledMain>
       <Container>
-        <StyledMainContent>Mdfdsfsdfsdfain</StyledMainContent>
+        <StyledMainContent>{<Outlet />}</StyledMainContent>
       </Container>
     </StyledMain>
   );
