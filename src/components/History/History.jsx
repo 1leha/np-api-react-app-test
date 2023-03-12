@@ -1,17 +1,17 @@
 import React from 'react';
 import TtnList from 'components/TtnList';
-import { Typography } from '@mui/material';
+import { Paper } from '@mui/material';
 import { StyledHistory } from './History.styled';
+import HistoryHeader from './HistoryHeader/HistoryHeader';
 // import PropTypes from 'prop-types'
 
 const History = props => {
   return (
     <StyledHistory>
-      <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
-        Історія ТТН
-      </Typography>
-
-      <TtnList />
+      <Paper elevation={3} sx={{ overflow: 'hidden' }}>
+        <HistoryHeader />
+        <TtnList />
+      </Paper>
     </StyledHistory>
   );
 };

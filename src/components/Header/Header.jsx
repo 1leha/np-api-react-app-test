@@ -1,10 +1,10 @@
 import { Box } from 'components/common/Box';
 import Container from 'components/common/Container';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import {
   StyledHeader,
   StyledHeaderLogoblock,
+  StyledHeaderNav,
   StyledHeaderTabs,
   StyledTab,
 } from './Header.styled';
@@ -13,11 +13,7 @@ import {
 const Header = () => {
   return (
     <StyledHeader>
-      <Box
-        as="nav"
-
-        // position="relative"
-      >
+      <StyledHeaderNav>
         <Box bg="brandColor" mb={4}>
           <Container>
             <StyledHeaderLogoblock>
@@ -32,7 +28,7 @@ const Header = () => {
             <StyledTab to={'/post-office'}>Список відділень</StyledTab>
           </StyledHeaderTabs>
         </Container>
-      </Box>
+      </StyledHeaderNav>
     </StyledHeader>
   );
 };
