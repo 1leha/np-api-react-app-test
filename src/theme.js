@@ -10,12 +10,13 @@ export const theme = {
 
     primary: '#3E3E3E',
     primaryLight: '#3E3E3E22',
+    primaryMiddle: '#3E3E3E55',
     secondary: 'white',
     brandColor: '#D00000',
     // fourth: '#1976d2',
     // hover: '#1976d233',
     active: '#ff1313',
-    activeTab: '#FFD4D4',
+    hoverTab: '#FFD4D4',
     // unfocused: '#1976d211',
 
     // titleBG: '#65472e',

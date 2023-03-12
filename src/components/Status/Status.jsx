@@ -6,7 +6,7 @@ import { StyledStatus } from './Status.styled';
 const Status = props => {
   return (
     <StyledStatus>
-      <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
+      <Typography sx={{ mt: 3, mb: 2 }} variant="h6" component="div">
         Інформація про відправлення
       </Typography>
 

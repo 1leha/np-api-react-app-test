@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Tooltip,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -18,26 +19,17 @@ const TtnList = props => {
         <ListItem
           button
           secondaryAction={
-            <IconButton edge="end" aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
+            <Tooltip title="Видалити" arrow>
+              <IconButton edge="end" aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
           }
         >
           <ListItemText primary="20400048799001" secondary="Titania" />
         </ListItem>
 
         <Divider />
-
-        <ListItem
-          button
-          secondaryAction={
-            <IconButton edge="end" aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          }
-        >
-          <ListItemText primary="20400048799001" secondary="Tethys" />
-        </ListItem>
       </List>
     </StyledTtnList>
   );

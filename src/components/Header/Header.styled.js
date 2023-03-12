@@ -8,6 +8,14 @@ export const StyledHeader = styled.header`
 
   border-bottom: ${p => p.theme.borders.bold};
   border-color: ${p => p.theme.colors.primaryLight};
+
+  @media screen and (min-width: 768px) {
+    border-bottom: none;
+  }
+`;
+
+export const StyledHeaderNav = styled.nav`
+  position: relative;
 `;
 
 export const StyledHeaderLogoblock = styled.div`
@@ -27,8 +35,6 @@ export const StyledHeaderLogoblock = styled.div`
   @media (min-width: 768px) {
     height: ${p => p.theme.space[6]}px;
   }
-
-  /* margin-bottom: ${p => p.theme.space[5]}px; */
 `;
 
 export const StyledHeaderTabs = styled.div`
@@ -39,7 +45,18 @@ export const StyledHeaderTabs = styled.div`
 
   background-color: white;
 
-  font-size: ${p => p.theme.fontSizes.l};
+  @media screen and (min-width: 768px) {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+    background-color: transparent;
+
+    transform: translateX(-60%);
+  }
+  @media screen and (min-width: 1200px) {
+    transform: translateX(-90%);
+  }
 `;
 
 export const StyledTab = styled(NavLink)`
@@ -83,6 +100,12 @@ export const StyledTab = styled(NavLink)`
     left: 0;
   }
 
+  &:hover,
+  &:focus {
+    color: ${p => p.theme.colors.primary};
+    background-color: ${p => p.theme.colors.hoverTab};
+  }
+
   &.active {
     cursor: default;
     font-weight: ${p => p.theme.fontWeights.bold};
@@ -110,6 +133,75 @@ export const StyledTab = styled(NavLink)`
       left: 0;
 
       background-color: ${p => p.theme.colors.secondary};
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    width: 150px;
+    height: ${p => p.theme.space[4]}px;
+    transform-origin: 0 bottom 0;
+    transform: scaleY(0.99);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: ${p => p.theme.space[3]}px;
+    gap: ${p => p.theme.space[3]}px;
+
+    color: ${p => p.theme.colors.secondary};
+    background-color: ${p => p.theme.colors.primaryMiddle};
+
+    font-size: ${p => p.theme.fontSizes.m};
+    font-weight: ${p => p.theme.fontWeights.normal};
+    text-decoration: none;
+
+    border-top-left-radius: ${p => p.theme.radii.standart};
+    border-top-right-radius: ${p => p.theme.radii.standart};
+
+    border: none;
+
+    transition: ${p => p.theme.transitions.standart};
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 3px;
+
+      bottom: -3px;
+      left: 0;
+    }
+
+    &:hover,
+    &:focus {
+      color: ${p => p.theme.colors.primary};
+      background-color: ${p => p.theme.colors.hoverTab};
+    }
+
+    &.active {
+      cursor: default;
+      font-weight: ${p => p.theme.fontWeights.bold};
+      transform: scaleY(1.05);
+
+      color: ${p => p.theme.colors.primary};
+      background-color: ${p => p.theme.colors.secondary};
+
+      border-top-left-radius: ${p => p.theme.radii.standart};
+      border-top-right-radius: ${p => p.theme.radii.standart};
+
+      border: none;
+
+      &::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 3px;
+
+        bottom: -3px;
+        left: 0;
+
+        background-color: ${p => p.theme.colors.secondary};
+      }
     }
   }
 `;

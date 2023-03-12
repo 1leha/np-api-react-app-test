@@ -1,21 +1,15 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import CloseIcon from '@mui/icons-material/Close';
+
 import Slide from '@mui/material/Slide';
 import TtnList from 'components/TtnList';
-
+import HistoryHeader from 'components/History/HistoryHeader/HistoryHeader';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function FullScreenDialog() {
-  // media queries
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -26,9 +20,19 @@ export default function FullScreenDialog() {
     setOpen(false);
   };
 
+  const handleClearAll = () => {
+    setOpen(false);
+  };
+
   return (
     <div>
-      <Button fullWidth variant="outlined" onClick={handleClickOpen}>
+      <Button
+        fullWidth
+        variant="outlined"
+        onClick={handleClickOpen}
+        size="large"
+        sx={{ height: '56px' }}
+      >
         Історія ТТН
       </Button>
       <Dialog
@@ -37,21 +41,7 @@ export default function FullScreenDialog() {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: 'relative' }}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              color="inherit"
-              onClick={handleClose}
-              aria-label="close"
-            >
-              <CloseIcon />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Історія ТТН
-            </Typography>
-          </Toolbar>
-        </AppBar>
+        <HistoryHeader onClose={handleClose} clearAll={handleClearAll} />
         <TtnList />
       </Dialog>
     </div>

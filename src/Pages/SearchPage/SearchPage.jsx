@@ -3,9 +3,9 @@ import React from 'react';
 import {
   Box,
   Button,
+  Divider,
   IconButton,
   InputAdornment,
-  Paper,
   TextField,
   useMediaQuery,
 } from '@mui/material';
@@ -15,7 +15,6 @@ import { ttnRegExp } from 'utils/options';
 import HistoryModal from 'components/Modals/HistoryModal';
 import { StyledSearchPage, StyledSearchPageResults } from './SearchPage.styled';
 import Status from 'components/Status';
-import TtnList from 'components/TtnList';
 import History from 'components/History';
 // import PropTypes from 'prop-types';
 
@@ -49,14 +48,16 @@ const SearchPage = props => {
         <Box
           component="form"
           sx={{
-            '& > :not(style)': { mb: 2 },
-            mb: 3,
+            '& > :not(style)': { mb: 4 },
+            mt: 0,
+            display: desktop ? 'flex' : 'block',
+            gap: 2,
           }}
           noValidate
           autoComplete="off"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Box component="div" sx={{ position: 'relative' }}>
+          <Box component="div" sx={{ flex: desktop ? '1 1 70%' : '1 1 auto' }}>
             <TextField
               fullWidth
               id="ttn"
@@ -96,10 +97,20 @@ const SearchPage = props => {
             />
           </Box>
 
-          <Button type="submit" fullWidth variant="outlined">
+          <Button
+            type="submit"
+            fullWidth
+            variant="outlined"
+            size={mobile || tablet ? 'large' : 'medium'}
+            sx={{
+              flex: desktop ? '1 1 30%' : '1 1 auto',
+              height: '56px',
+            }}
+          >
             Отримати статус за ТТН
           </Button>
         </Box>
+        <Divider />
 
         {/* Result */}
         {/* <Paper sx={{ p: 2 }}> */}
