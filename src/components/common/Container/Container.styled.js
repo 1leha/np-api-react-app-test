@@ -7,17 +7,17 @@ export const StyledContainer = styled.div`
   padding-left: ${p => p.theme.space[4]}px;
   padding-right: ${p => p.theme.space[4]}px;
 
-  width: 100%;
+  max-width: 320px;
 
-  @media (min-width: 480px) {
-    width: 480px;
+  @media screen and (min-width: 480px) {
+    max-width: 420px;
   }
 
-  @media (min-width: 768px) {
-    width: 768px;
+  @media screen and (min-width: 768px) {
+    max-width: 732px;
   }
 
-  @media (min-width: 1200px) {
-    width: 1200px;
+  @media screen and (min-width: 1200px) {
+    max-width: 1100px;
   }
 `;

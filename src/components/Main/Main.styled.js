@@ -9,4 +9,7 @@ export const StyledMain = styled.main`
 
 export const StyledMainContent = styled.div`
   display: block;
+  height: 80vh;
+  margin-top: 20px;
+  /* background-color: tomato; */
 `;

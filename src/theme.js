@@ -2,17 +2,20 @@ export const theme = {
   borders: {
     none: 'none',
     normal: '1px solid',
+    bold: '2px solid',
   },
 
   colors: {
     appBGColor: 'ffffff',
 
     primary: '#3E3E3E',
+    primaryLight: '#3E3E3E22',
     secondary: 'white',
     brandColor: '#D00000',
     // fourth: '#1976d2',
     // hover: '#1976d233',
     active: '#ff1313',
+    activeTab: '#FFD4D4',
     // unfocused: '#1976d211',
 
     // titleBG: '#65472e',
@@ -50,7 +53,7 @@ export const theme = {
   },
 
   shadows: {
-    standart: `0px 0px 5px #44444455`,
+    standart: `0px -1px 2px #3E3E3E22`,
     onFocus: `inset 0px -2px 2px #00000055`,
     onHover: `inset 0 0 5px #00000055`,
   },
@@ -60,7 +63,7 @@ export const theme = {
   sizes: {
     wholeHeight: '100vh',
   },
-  transitions: { standart: 'all 0.3s ease-in' },
+  transitions: { standart: 'all 0.1s ease-in' },
 };
 
 // Моя шпаргалка
