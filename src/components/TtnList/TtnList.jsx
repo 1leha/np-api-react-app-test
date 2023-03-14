@@ -5,6 +5,7 @@ import {
   List,
   ListItem,
   ListItemText,
+  Paper,
   Tooltip,
   Typography,
 } from '@mui/material';
@@ -12,7 +13,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { StyledTtnList } from './TtnList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { sellectFiltredTtn } from 'redux/ttn/ttnSellectors';
+import {
+  sellectFiltredTtn,
+  sellectIsFilteredTtnListEmpty,
+} from 'redux/ttn/ttnSellectors';
 import { format } from 'date-fns';
 import { styled } from '@mui/material/styles';
 import { tooltipClasses } from '@mui/material/Tooltip';
@@ -36,52 +40,65 @@ const TtnList = () => {
     },
   }));
 
+  const isTtnFilteredListEmpty = useSelector(sellectIsFilteredTtnListEmpty);
+
   return (
     <StyledTtnList>
-      <List sx={{ maxHeight: '60vh' }}>
-        {filteredTtnList.map(
-          ({ Number, requestDate, Status, RecipientDateTime, StatusCode }) => {
-            return (
-              <li key={Number}>
-                <ListItem
-                  sx={{
-                    background: StatusCode === '9' ? '#00D1D111' : '#3E3E3E22',
-                  }}
-                  button
-                  secondaryAction={
-                    <Tooltip title="Видалити" arrow>
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          dispatch(removeTtn(Number));
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </Tooltip>
-                  }
-                >
-                  <HtmlTooltip
-                    title={
-                      <React.Fragment>
-                        <Typography color="inherit">{Status}</Typography>
-                        <b>{RecipientDateTime}</b>
-                      </React.Fragment>
+      {isTtnFilteredListEmpty ? (
+        <Paper sx={{ p: 2 }}>Нічого не знайдено...</Paper>
+      ) : (
+        <List sx={{ maxHeight: '60vh' }}>
+          {filteredTtnList.map(
+            ({
+              Number,
+              requestDate,
+              Status,
+              RecipientDateTime,
+              StatusCode,
+            }) => {
+              return (
+                <li key={Number}>
+                  <ListItem
+                    sx={{
+                      background:
+                        StatusCode === '9' ? '#00D1D111' : '#3E3E3E22',
+                    }}
+                    button
+                    secondaryAction={
+                      <Tooltip title="Видалити" arrow>
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            dispatch(removeTtn(Number));
+                          }}
+                        >
+                          <DeleteIcon />
+                        </IconButton>
+                      </Tooltip>
                     }
                   >
-                    <ListItemText
-                      primary={Number}
-                      secondary={format(requestDate, 'hh:mm:ss')}
-                    />
-                  </HtmlTooltip>
-                </ListItem>
-                <Divider />
-              </li>
-            );
-          }
-        )}
-      </List>
+                    <HtmlTooltip
+                      title={
+                        <React.Fragment>
+                          <Typography color="inherit">{Status}</Typography>
+                          <b>{RecipientDateTime}</b>
+                        </React.Fragment>
+                      }
+                    >
+                      <ListItemText
+                        primary={Number}
+                        secondary={format(requestDate, 'hh:mm:ss')}
+                      />
+                    </HtmlTooltip>
+                  </ListItem>
+                  <Divider />
+                </li>
+              );
+            }
+          )}
+        </List>
+      )}
     </StyledTtnList>
   );
 };
