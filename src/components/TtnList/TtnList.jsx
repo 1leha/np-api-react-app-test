@@ -11,16 +11,18 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import { StyledTtnList } from './TtnList.styled';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { sellectTtn } from 'redux/ttn/ttnSellectors';
 import { format } from 'date-fns';
 import { styled } from '@mui/material/styles';
 import { tooltipClasses } from '@mui/material/Tooltip';
+import { removeTtn } from 'redux/ttn/ttnSlice';
 
 // import PropTypes from 'prop-types'
 
 const TtnList = () => {
   const ttnList = useSelector(sellectTtn);
+  const dispatch = useDispatch();
 
   const HtmlTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
@@ -48,7 +50,13 @@ const TtnList = () => {
                   button
                   secondaryAction={
                     <Tooltip title="Видалити" arrow>
-                      <IconButton edge="end" aria-label="delete">
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {
+                          dispatch(removeTtn(Number));
+                        }}
+                      >
                         <DeleteIcon />
                       </IconButton>
                     </Tooltip>

@@ -18,10 +18,21 @@ const initialTtn = {
 const ttnSlice = createSlice({
   name: 'ttn',
   initialState: initialTtn,
-  reducers: {},
+  reducers: {
+    removeTtn({ items }, { payload }) {
+      const idx = items.findIndex(item => {
+        return +item.Number === +payload;
+      });
+      items.splice(idx, 1);
+    },
+
+    removeAllTtn({ items }, _) {
+      items.length = 0;
+    },
+  },
   extraReducers: builder => {
     builder
-      .addCase(fetchTtn.pending, (state, { payload }) => {
+      .addCase(fetchTtn.pending, (state, _) => {
         state.isLoading = true;
       })
       .addCase(fetchTtn.fulfilled, (state, { payload }) => {
@@ -37,9 +48,12 @@ const ttnSlice = createSlice({
       })
       .addCase(fetchTtn.rejected, (state, { payload }) => {
         state.isLoading = false;
+        state.error = payload;
       });
   },
 });
+
+export const { removeTtn, removeAllTtn } = ttnSlice.actions;
 
 export const persistedTtnReducer = persistReducer(
   persistConfig,

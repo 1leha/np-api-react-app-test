@@ -5,8 +5,13 @@ export const StyledHistory = styled.div`
 
   height: 100%;
 
+  *::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  border-radius: ${p => p.theme.radii.standart};
   /* background-color: aqua; */
-  /* overflow: hidden; */
+  overflow: hidden;
   /* border: solid 3px; */
 
   @media screen and (min-width: 1200px) {

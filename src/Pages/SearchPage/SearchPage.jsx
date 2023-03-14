@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useForm } from 'react-hook-form';
-import { ttnRegExp } from 'utils/options';
+import { ttnLengthRegExp, ttnRegExp } from 'utils/options';
 import HistoryModal from 'components/Modals/HistoryModal';
 import { StyledSearchPage, StyledSearchPageResults } from './SearchPage.styled';
 import Status from 'components/Status';
@@ -50,12 +50,13 @@ const SearchPage = props => {
   };
 
   const handlerInput = e => {
-    // console.log('target >>> ', e.target.value.length);
+    // console.log('isNaN >>> ', Number.isNaN(+e.target.value));
+    // console.log('value >>> ', e.target.value);
     // console.log('ttnValue >>> ', ttnValue.length);
-    if (e.target.value.length > 14) {
+    if (e.target.value.length > 14 || Number.isNaN(+e.target.value)) {
       return;
     }
-    setTtnValue(e.target.value);
+    setTtnValue(e.target.value.trim());
   };
 
   return (
@@ -79,10 +80,9 @@ const SearchPage = props => {
               fullWidth
               id="ttn"
               name="ttn"
-              type="number"
+              // type="number"
               label="Введіть ТТН"
               variant="outlined"
-              maxLength="14"
               value={ttnValue}
               {...register('ttn', {
                 required: {
@@ -91,7 +91,8 @@ const SearchPage = props => {
                 },
                 pattern: {
                   value: ttnRegExp,
-                  message: 'Номер має починатися з чисел: 1, 2, 5',
+                  message:
+                    'Номер має починатися з чисел: 1, 2, 5, та бути довжиной 14 символів!',
                 },
               })}
               error={!!errors.ttn}

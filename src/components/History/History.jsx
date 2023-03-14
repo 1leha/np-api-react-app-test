@@ -10,7 +10,13 @@ const History = () => {
     <StyledHistory>
       <Paper elevation={3} sx={{ height: '100%' }}>
         <HistoryHeader />
-        <Paper sx={{ overflowY: 'scroll' }}>
+        <Paper
+          sx={{
+            overflowY: 'scroll',
+            scrollbarWidth: '10px',
+            scrollbarColor: 'red',
+          }}
+        >
           <TtnList />
         </Paper>
       </Paper>

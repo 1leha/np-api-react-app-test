@@ -11,14 +11,19 @@ import CloseIcon from '@mui/icons-material/Close';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 
 import Filter from 'components/Filter';
+import { useDispatch } from 'react-redux';
+import { removeAllTtn } from 'redux/ttn/ttnSlice';
 
 const HistoryHeader = ({ onClose }) => {
+  const dispatch = useDispatch();
+
   // media queries
   const mobile = useMediaQuery('(max-width:767px)');
   const tablet = useMediaQuery('(min-width:768px)');
   // const desktop = useMediaQuery('(min-width:1200px)');
 
   const handleClearAll = () => {
+    dispatch(removeAllTtn());
     onClose();
   };
 
