@@ -23,3 +23,7 @@ export const sellectIsFilteredTtnListEmpty = createSelector(
     return sellectFiltredTtn.length === 0;
   }
 );
+
+export const sellectCurrentTtn = createSelector([sellectTtn], sellectTtn => {
+  return sellectTtn[0];
+});

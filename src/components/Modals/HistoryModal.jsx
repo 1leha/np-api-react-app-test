@@ -5,12 +5,16 @@ import Dialog from '@mui/material/Dialog';
 import Slide from '@mui/material/Slide';
 import TtnList from 'components/TtnList';
 import HistoryHeader from 'components/History/HistoryHeader/HistoryHeader';
+import { useSelector } from 'react-redux';
+import { sellectIsTtnListEmpty } from 'redux/ttn/ttnSellectors';
+import { Paper } from '@mui/material';
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function FullScreenDialog() {
   const [open, setOpen] = React.useState(false);
+  const isTtnListEmpty = useSelector(sellectIsTtnListEmpty);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -42,7 +46,11 @@ export default function FullScreenDialog() {
         TransitionComponent={Transition}
       >
         <HistoryHeader onClose={handleClose} clearAll={handleClearAll} />
-        <TtnList />
+        {isTtnListEmpty ? (
+          <Paper sx={{ p: 2 }}>Історія відсутня...</Paper>
+        ) : (
+          <TtnList onClose={handleClose} />
+        )}
       </Dialog>
     </div>
   );

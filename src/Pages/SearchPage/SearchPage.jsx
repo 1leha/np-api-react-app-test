@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Box,
@@ -6,7 +6,9 @@ import {
   Divider,
   IconButton,
   InputAdornment,
+  Paper,
   TextField,
+  Typography,
   useMediaQuery,
 } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
@@ -14,13 +16,14 @@ import { useForm } from 'react-hook-form';
 import { ttnRegExp } from 'utils/options';
 import HistoryModal from 'components/Modals/HistoryModal';
 import { StyledSearchPage, StyledSearchPageResults } from './SearchPage.styled';
-import Status from 'components/Status';
+// import Status from 'components/Status';
 import History from 'components/History';
 import { useDispatch } from 'react-redux';
 import { fetchTtn } from 'redux/ttn/ttnOperations';
+import { Outlet, useNavigate, useParams } from 'react-router';
 // import PropTypes from 'prop-types';
 
-const SearchPage = props => {
+const SearchPage = () => {
   const [ttnValue, setTtnValue] = useState('');
 
   const {
@@ -31,6 +34,20 @@ const SearchPage = props => {
   } = useForm();
 
   const dispatch = useDispatch();
+  const { ttnId } = useParams();
+
+  // console.log('ttnId :>> ', ttnId);
+
+  useEffect(() => {
+    setTtnValue(ttnId);
+
+    return () => {
+      setTtnValue('');
+      reset();
+    };
+  }, [reset, ttnId]);
+
+  const navigate = useNavigate();
 
   const mobile = useMediaQuery('(max-width:767px)');
   const tablet = useMediaQuery('(min-width:768px)');
@@ -39,15 +56,12 @@ const SearchPage = props => {
   const onReset = () => {
     setTtnValue('');
     reset();
+    navigate(`/check`);
   };
 
   const onSubmit = async ({ ttn }) => {
-    console.log('onSubmit :>> ');
     dispatch(fetchTtn(ttn));
-    // navigate('/contacts');
-    // console.log('data :>> ', ttn);
-    setTtnValue('');
-    reset();
+    navigate(`/check/${ttn}`);
   };
 
   const handlerInput = e => {
@@ -136,9 +150,25 @@ const SearchPage = props => {
         <Divider />
 
         {/* Result */}
-        {/* <Paper sx={{ p: 2 }}> */}
-        <Status />
-        {/* </Paper> */}
+
+        {/* <Status /> */}
+        {ttnId ? (
+          <Outlet />
+        ) : (
+          <Paper sx={{ mt: 3, p: 2 }}>
+            <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
+              Інструкція.
+            </Typography>
+            <Divider />
+
+            <Typography sx={{ mt: 1, mb: 1 }} component="p">
+              Для отримання інформації про відправлення введіть ТТН. ТТН номер
+              має починатися з символів 1, 2, 5 і містити тільки 14 числових
+              знаків!
+            </Typography>
+          </Paper>
+        )}
+
         {/* History */}
       </StyledSearchPageResults>
       {mobile && <HistoryModal />}
