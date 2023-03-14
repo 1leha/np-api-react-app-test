@@ -58,6 +58,7 @@ export const theme = {
 
   shadows: {
     standart: `0px -1px 2px #3E3E3E22`,
+    history: `0px 0px 10px #3E3E3E22`,
     onFocus: `inset 0px -2px 2px #00000055`,
     onHover: `inset 0 0 5px #00000055`,
   },

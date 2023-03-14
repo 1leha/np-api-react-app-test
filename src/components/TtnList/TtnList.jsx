@@ -12,7 +12,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { StyledTtnList } from './TtnList.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { sellectTtn } from 'redux/ttn/ttnSellectors';
+import { sellectFiltredTtn } from 'redux/ttn/ttnSellectors';
 import { format } from 'date-fns';
 import { styled } from '@mui/material/styles';
 import { tooltipClasses } from '@mui/material/Tooltip';
@@ -21,7 +21,7 @@ import { removeTtn } from 'redux/ttn/ttnSlice';
 // import PropTypes from 'prop-types'
 
 const TtnList = () => {
-  const ttnList = useSelector(sellectTtn);
+  const filteredTtnList = useSelector(sellectFiltredTtn);
   const dispatch = useDispatch();
 
   const HtmlTooltip = styled(({ className, ...props }) => (
@@ -39,7 +39,7 @@ const TtnList = () => {
   return (
     <StyledTtnList>
       <List sx={{ maxHeight: '60vh' }}>
-        {ttnList.map(
+        {filteredTtnList.map(
           ({ Number, requestDate, Status, RecipientDateTime, StatusCode }) => {
             return (
               <li key={Number}>

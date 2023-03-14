@@ -11,11 +11,13 @@ import CloseIcon from '@mui/icons-material/Close';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 
 import Filter from 'components/Filter';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeAllTtn } from 'redux/ttn/ttnSlice';
+import { sellectIsTtnListEmpty } from 'redux/ttn/ttnSellectors';
 
 const HistoryHeader = ({ onClose }) => {
   const dispatch = useDispatch();
+  const isTtnListEmpty = useSelector(sellectIsTtnListEmpty);
 
   // media queries
   const mobile = useMediaQuery('(max-width:767px)');
@@ -59,7 +61,7 @@ const HistoryHeader = ({ onClose }) => {
           </IconButton>
         </Tooltip>
       </Toolbar>
-      <Filter />
+      {!isTtnListEmpty && <Filter />}
     </AppBar>
   );
 };

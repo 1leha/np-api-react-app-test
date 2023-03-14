@@ -4,7 +4,7 @@ export const StyledHistory = styled.div`
   flex: 1 1 30%;
 
   height: 100%;
-
+  box-shadow: ${p => p.theme.shadows.history};
   *::-webkit-scrollbar {
     width: 0px;
   }
