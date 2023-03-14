@@ -3,23 +3,32 @@ import TtnList from 'components/TtnList';
 import { Paper } from '@mui/material';
 import { StyledHistory } from './History.styled';
 import HistoryHeader from './HistoryHeader/HistoryHeader';
+import { useSelector } from 'react-redux';
+import { sellectIsTtnListEmpty } from 'redux/ttn/ttnSellectors';
 // import PropTypes from 'prop-types'
 
 const History = () => {
+  const isTtnListEmpty = useSelector(sellectIsTtnListEmpty);
+
   return (
     <StyledHistory>
-      <Paper elevation={3} sx={{ height: '100%' }}>
-        <HistoryHeader />
-        <Paper
-          sx={{
-            overflowY: 'scroll',
-            scrollbarWidth: '10px',
-            scrollbarColor: 'red',
-          }}
-        >
+      {/* <Paper elevation={5} sx={{ height: '100%' }}> */}
+      <HistoryHeader />
+      <Paper
+        sx={{
+          overflowY: 'scroll',
+          scrollbarWidth: '10px',
+          scrollbarColor: 'red',
+        }}
+      >
+        {/* <TtnList /> */}
+        {isTtnListEmpty ? (
+          <Paper sx={{ p: 2 }}>Історія ТТН відсутня...</Paper>
+        ) : (
           <TtnList />
-        </Paper>
+        )}
       </Paper>
+      {/* </Paper> */}
     </StyledHistory>
   );
 };
