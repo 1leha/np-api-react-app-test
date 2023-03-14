@@ -16,3 +16,10 @@ export const sellectFiltredTtn = createSelector(
 export const sellectIsTtnListEmpty = createSelector([sellectTtn], ttnList => {
   return ttnList.length === 0;
 });
+
+export const sellectIsFilteredTtnListEmpty = createSelector(
+  [sellectFiltredTtn],
+  sellectFiltredTtn => {
+    return sellectFiltredTtn.length === 0;
+  }
+);
