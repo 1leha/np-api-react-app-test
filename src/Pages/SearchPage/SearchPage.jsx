@@ -80,6 +80,7 @@ const SearchPage = props => {
           <Box component="div" sx={{ flex: desktop ? '1 1 70%' : '1 1 auto' }}>
             <TextField
               fullWidth
+              required
               id="ttn"
               name="ttn"
               // type="number"
