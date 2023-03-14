@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "DocumentWeight": 1,
+      "FactualWeight": "1.00",
+      "CargoType": "Documents",
+      "ScheduledDeliveryDate": "02-03-2023 13:17:25",
+      "DocumentCost": "55",
+      "Number": "59000935858185",
+      "WarehouseRecipient": "Пункт приймання-видачі (до 30 кг): вул. Набережна, 6",
+      "WarehouseSender": "Відділення №71 (до 10 кг): просп. Тракторобудівників, 86/137",
+      "DateCreated": "01-03-2023 15:49:58",
+      "RecipientDateTime": "04.03.2023 14:47:13",
+      "RefCityRecipient": "592d8510-d426-11eb-80fb-b8830365bd04",
+      "RefCitySender": "db5c88e0-391c-11dd-90d9-001a92567626",
+      "RefSettlementRecipient": "0e4935fe-4b3a-11e4-ab6d-005056801329",
+      "RefSettlementSender": "e71f8842-4b33-11e4-ab6d-005056801329",
+      "SenderAddress": "",
+      "CitySender": "Харків",
+      "CityRecipient": "Глибока Балка (Полтавська обл.)",
+      "CargoDescriptionString": "",
+      "ActualDeliveryDate": "2023-03-02 13:17:25",
+      "StatusCode": "9",
+      "RefEW": "12b5788d-b838-11ed-a361-48df37b92096",
+      "VolumeWeight": "0.01",
+      "Status": "Відправлення отримано",
+      "RecipientWarehouseTypeRef": "841339c7-591a-42e2-8233-7a0a00f0ed6f",
+      "WarehouseRecipientInternetAddressRef": "a7385faf-d5b8-11eb-9cc7-b8830365bd14",
+      "WarehouseRecipientNumber": 1,
+      "WarehouseRecipientRef": "919183bd-051d-4b9d-abc9-8a3ee7971761",
+      "CategoryOfWarehouse": "Store",
+      "WarehouseRecipientAddress": "Глибока Балка, Набережна, 6",
+      "WarehouseSenderInternetAddressRef": "672248fd-b368-11e4-a77a-005056887b8d",
+      "WarehouseSenderAddress": "Харків, Тракторобудівників, 86/137",
+      "CounterpartyType": "PrivatePerson",
+      "CounterpartySenderType": "PrivatePerson"
+    }
+  ]
+}

@@ -1,9 +1,20 @@
 import styled from 'styled-components';
 
 export const StyledHistory = styled.div`
-  flex: 0 0 30%;
+  flex: 1 1 30%;
+
+  height: 100%;
+
+  *::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  border-radius: ${p => p.theme.radii.standart};
+  /* background-color: aqua; */
+  overflow: hidden;
+  /* border: solid 3px; */
 
   @media screen and (min-width: 1200px) {
-    flex: 0 0 20%;
+    flex: 1 1 20%;
   }
 `;

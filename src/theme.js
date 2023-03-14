@@ -17,6 +17,9 @@ export const theme = {
     // hover: '#1976d233',
     active: '#ff1313',
     hoverTab: '#FFD4D4',
+
+    statusNotFound: '#FFD4D4',
+    statusDone: '#00D1D111',
     // unfocused: '#1976d211',
 
     // titleBG: '#65472e',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Box,
@@ -16,9 +16,13 @@ import HistoryModal from 'components/Modals/HistoryModal';
 import { StyledSearchPage, StyledSearchPageResults } from './SearchPage.styled';
 import Status from 'components/Status';
 import History from 'components/History';
+import { useDispatch } from 'react-redux';
+import { fetchTtn } from 'redux/ttn/ttnOperations';
 // import PropTypes from 'prop-types';
 
 const SearchPage = props => {
+  const [ttnValue, setTtnValue] = useState('');
+
   const {
     register,
     handleSubmit,
@@ -26,19 +30,35 @@ const SearchPage = props => {
     reset,
   } = useForm();
 
+  const dispatch = useDispatch();
+
   const mobile = useMediaQuery('(max-width:767px)');
   const tablet = useMediaQuery('(min-width:768px)');
   const desktop = useMediaQuery('(min-width:1200px)');
 
-  const onSubmit = async data => {
-    // await dispatch(login(data)).unwrap();
-    // navigate('/contacts');
-    console.log('data :>> ', data);
+  const onReset = () => {
+    setTtnValue('');
     reset();
   };
 
-  const onReset = () => {
+  const onSubmit = async ({ ttn }) => {
+    console.log('onSubmit :>> ');
+    dispatch(fetchTtn(ttn));
+    // navigate('/contacts');
+    // console.log('data :>> ', ttn);
+    setTtnValue('');
     reset();
+  };
+
+  const handlerInput = e => {
+    // console.log('isNaN >>> ', Number.isNaN(+e.target.value));
+    // console.log('value >>> ', e.target.value.length);
+    // console.log('ttnValue >>> ', ttnValue.length);
+    if (e.target.value.length > 14 || Number.isNaN(+e.target.value)) {
+      e.target.value = ttnValue;
+      return;
+    }
+    setTtnValue(e.target.value.trim());
   };
 
   return (
@@ -54,18 +74,19 @@ const SearchPage = props => {
             gap: 2,
           }}
           noValidate
-          autoComplete="off"
+          autoComplete="on"
           onSubmit={handleSubmit(onSubmit)}
         >
           <Box component="div" sx={{ flex: desktop ? '1 1 70%' : '1 1 auto' }}>
             <TextField
               fullWidth
+              required
               id="ttn"
               name="ttn"
-              type="number"
+              // type="number"
               label="Введіть ТТН"
               variant="outlined"
-              maxLength="14"
+              value={ttnValue}
               {...register('ttn', {
                 required: {
                   value: true,
@@ -73,7 +94,8 @@ const SearchPage = props => {
                 },
                 pattern: {
                   value: ttnRegExp,
-                  message: 'Номер має бути розміром 14 символів',
+                  message:
+                    'Номер має починатися з чисел: 1, 2, 5, та бути довжиной 14 символів!',
                 },
               })}
               error={!!errors.ttn}
@@ -94,6 +116,7 @@ const SearchPage = props => {
                   </InputAdornment>
                 ),
               }}
+              onInput={handlerInput}
             />
           </Box>
 
