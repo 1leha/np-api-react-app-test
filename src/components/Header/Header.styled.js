@@ -52,10 +52,10 @@ export const StyledHeaderTabs = styled.div`
     left: 50%;
     background-color: transparent;
 
-    transform: translateX(-60%);
+    transform: translateX(7%);
   }
   @media screen and (min-width: 1200px) {
-    transform: translateX(-90%);
+    transform: translateX(-50%);
   }
 `;
 
@@ -71,6 +71,7 @@ export const StyledTab = styled(NavLink)`
   align-items: center;
   justify-content: center;
   padding: ${p => p.theme.space[4]}px;
+  flex: 1 1 auto;
 
   color: ${p => p.theme.colors.primary};
   background-color: ${p => p.theme.colors.primaryLight};
@@ -137,15 +138,18 @@ export const StyledTab = styled(NavLink)`
   }
 
   @media screen and (min-width: 768px) {
-    width: 150px;
-    height: ${p => p.theme.space[4]}px;
+    width: auto;
+    height: ${p => p.theme.space[5]}px;
     transform-origin: 0 bottom 0;
     transform: scaleY(0.99);
 
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: ${p => p.theme.space[3]}px;
+    padding-top: ${p => p.theme.space[2]}px;
+    padding-bottom: ${p => p.theme.space[2]}px;
+    padding-left: ${p => p.theme.space[4]}px;
+    padding-right: ${p => p.theme.space[4]}px;
     gap: ${p => p.theme.space[3]}px;
 
     color: ${p => p.theme.colors.secondary};

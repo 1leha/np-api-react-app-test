@@ -18,14 +18,14 @@ const Header = () => {
           <Container>
             <StyledHeaderLogoblock>
               <div>New Post</div>
-              <div>info</div>
             </StyledHeaderLogoblock>
           </Container>
         </Box>
         <Container>
           <StyledHeaderTabs>
-            <StyledTab to={'/'}>Перевірити ТТН</StyledTab>
-            <StyledTab to={'/post-office'}>Список відділень</StyledTab>
+            <StyledTab to="/">Info</StyledTab>
+            <StyledTab to="/check">Перевірити ТТН</StyledTab>
+            <StyledTab to="/post-office">Список відділень</StyledTab>
           </StyledHeaderTabs>
         </Container>
       </StyledHeaderNav>

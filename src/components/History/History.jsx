@@ -17,8 +17,6 @@ const History = () => {
       <Paper
         sx={{
           overflowY: 'scroll',
-          scrollbarWidth: '10px',
-          scrollbarColor: 'red',
         }}
       >
         {/* <TtnList /> */}

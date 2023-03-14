@@ -2,6 +2,7 @@ import { Box } from 'components/common/Box';
 import Header from 'components/Header';
 import Main from 'components/Main';
 import React from 'react';
+import { Outlet } from 'react-router';
 
 // import PropTypes from 'prop-types'
 
@@ -16,7 +17,7 @@ const Layout = () => {
         flexDirection="column"
       >
         <Header />
-        <Main />
+        <Main>{<Outlet />}</Main>
         {/* <Footer /> */}
       </Box>
     </Box>

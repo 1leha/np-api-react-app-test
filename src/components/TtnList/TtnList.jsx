@@ -8,6 +8,7 @@ import {
   Paper,
   Tooltip,
   Typography,
+  useMediaQuery,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
@@ -21,12 +22,15 @@ import { format } from 'date-fns';
 import { styled } from '@mui/material/styles';
 import { tooltipClasses } from '@mui/material/Tooltip';
 import { removeTtn } from 'redux/ttn/ttnSlice';
+import { fetchTtn } from 'redux/ttn/ttnOperations';
+import { useNavigate } from 'react-router';
 
 // import PropTypes from 'prop-types'
 
-const TtnList = () => {
+const TtnList = ({ onClose }) => {
   const filteredTtnList = useSelector(sellectFiltredTtn);
   const dispatch = useDispatch();
+  const mobile = useMediaQuery('(max-width:767px)');
 
   const HtmlTooltip = styled(({ className, ...props }) => (
     <Tooltip {...props} classes={{ popper: className }} />
@@ -41,6 +45,19 @@ const TtnList = () => {
   }));
 
   const isTtnFilteredListEmpty = useSelector(sellectIsFilteredTtnListEmpty);
+  const navigate = useNavigate();
+
+  const handleRemove = (e, ttn) => {
+    e.stopPropagation();
+
+    dispatch(removeTtn(ttn));
+  };
+
+  const handleCheck = ttn => {
+    dispatch(fetchTtn(ttn));
+    navigate(`/check/${ttn}`);
+    mobile && onClose();
+  };
 
   return (
     <StyledTtnList>
@@ -64,14 +81,13 @@ const TtnList = () => {
                         StatusCode === '9' ? '#00D1D111' : '#3E3E3E22',
                     }}
                     button
+                    onClick={() => handleCheck(Number)}
                     secondaryAction={
                       <Tooltip title="Видалити" arrow>
                         <IconButton
                           edge="end"
                           aria-label="delete"
-                          onClick={() => {
-                            dispatch(removeTtn(Number));
-                          }}
+                          onClick={e => handleRemove(e, Number)}
                         >
                           <DeleteIcon />
                         </IconButton>
