@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useForm } from 'react-hook-form';
-import { ttnLengthRegExp, ttnRegExp } from 'utils/options';
+import { ttnRegExp } from 'utils/options';
 import HistoryModal from 'components/Modals/HistoryModal';
 import { StyledSearchPage, StyledSearchPageResults } from './SearchPage.styled';
 import Status from 'components/Status';
@@ -42,6 +42,7 @@ const SearchPage = props => {
   };
 
   const onSubmit = async ({ ttn }) => {
+    console.log('onSubmit :>> ');
     dispatch(fetchTtn(ttn));
     // navigate('/contacts');
     // console.log('data :>> ', ttn);
@@ -51,9 +52,10 @@ const SearchPage = props => {
 
   const handlerInput = e => {
     // console.log('isNaN >>> ', Number.isNaN(+e.target.value));
-    // console.log('value >>> ', e.target.value);
+    // console.log('value >>> ', e.target.value.length);
     // console.log('ttnValue >>> ', ttnValue.length);
     if (e.target.value.length > 14 || Number.isNaN(+e.target.value)) {
+      e.target.value = ttnValue;
       return;
     }
     setTtnValue(e.target.value.trim());

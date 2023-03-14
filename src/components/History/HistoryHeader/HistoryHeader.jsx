@@ -24,7 +24,7 @@ const HistoryHeader = ({ onClose }) => {
 
   const handleClearAll = () => {
     dispatch(removeAllTtn());
-    onClose();
+    mobile && onClose();
   };
 
   return (
