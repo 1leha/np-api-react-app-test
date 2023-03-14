@@ -23,7 +23,7 @@ const History = () => {
       >
         {/* <TtnList /> */}
         {isTtnListEmpty ? (
-          <Paper sx={{ p: 2 }}>Історія ТТН відсутня...</Paper>
+          <Paper sx={{ p: 2 }}>Історія відсутня...</Paper>
         ) : (
           <TtnList />
         )}
