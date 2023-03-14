@@ -5,12 +5,14 @@ import { StyledHistory } from './History.styled';
 import HistoryHeader from './HistoryHeader/HistoryHeader';
 // import PropTypes from 'prop-types'
 
-const History = props => {
+const History = () => {
   return (
     <StyledHistory>
-      <Paper elevation={3} sx={{ overflow: 'hidden' }}>
+      <Paper elevation={3} sx={{ height: '100%' }}>
         <HistoryHeader />
-        <TtnList />
+        <Paper sx={{ overflowY: 'scroll' }}>
+          <TtnList />
+        </Paper>
       </Paper>
     </StyledHistory>
   );

@@ -12,7 +12,7 @@ import { persistedTtnReducer } from './ttn/ttnSlice';
 
 export const store = configureStore({
   reducer: {
-    contacts: persistedTtnReducer,
+    ttn: persistedTtnReducer,
   },
 
   middleware: getDefaultMiddleware =>

@@ -10,6 +10,8 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import ClearAllIcon from '@mui/icons-material/ClearAll';
 
+import Filter from 'components/Filter';
+
 const HistoryHeader = ({ onClose }) => {
   // media queries
   const mobile = useMediaQuery('(max-width:767px)');
@@ -52,6 +54,7 @@ const HistoryHeader = ({ onClose }) => {
           </IconButton>
         </Tooltip>
       </Toolbar>
+      <Filter />
     </AppBar>
   );
 };
