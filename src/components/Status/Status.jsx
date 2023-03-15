@@ -6,8 +6,7 @@ import { StyledStatus } from './Status.styled';
 // import PropTypes from 'prop-types'
 
 const Status = () => {
-  const { Status, StatusCode, WarehouseSender, WarehouseRecipient } =
-    useSelector(sellectCurrentTtn);
+  const ttnData = useSelector(sellectCurrentTtn);
 
   return (
     <StyledStatus>
@@ -15,16 +14,16 @@ const Status = () => {
         Інформація про відправлення
       </Typography>
 
-      {StatusCode !== '3' ? (
+      {ttnData.StatusCode !== '3' ? (
         <>
-          <p>Статус доставки: {Status}</p>
+          <p>Статус доставки: {ttnData.Status}</p>
           <p>Відправлено:</p>
-          <p>{WarehouseSender}</p>
+          <p>{ttnData.WarehouseSender}</p>
           <p>Отримано:</p>
-          <p>{WarehouseRecipient}</p>
+          <p>{ttnData.WarehouseRecipient}</p>
         </>
       ) : (
-        <>{Status}</>
+        <>{ttnData.Status}</>
       )}
     </StyledStatus>
   );

@@ -14,10 +14,12 @@ import Filter from 'components/Filter';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAllTtn } from 'redux/ttn/ttnSlice';
 import { sellectIsTtnListEmpty } from 'redux/ttn/ttnSellectors';
+import { useNavigate } from 'react-router-dom';
 
 const HistoryHeader = ({ onClose }) => {
   const dispatch = useDispatch();
   const isTtnListEmpty = useSelector(sellectIsTtnListEmpty);
+  const navigate = useNavigate();
 
   // media queries
   const mobile = useMediaQuery('(max-width:767px)');
@@ -26,6 +28,8 @@ const HistoryHeader = ({ onClose }) => {
 
   const handleClearAll = () => {
     dispatch(removeAllTtn());
+    navigate(`/check`);
+
     mobile && onClose();
   };
 
