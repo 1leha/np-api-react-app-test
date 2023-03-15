@@ -1,8 +1,8 @@
-import Layout from './Layout';
+import Layout from '../Layout';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import SearchPage from 'Pages/SearchPage';
-import PostOfficesPage from 'Pages/PostOfficesPage';
-import Status from './Status';
+import PostOfficesPage from 'Pages/PostOfficesPage/PostOfficesPage';
+import Status from '../Status';
 
 export const App = () => {
   return (

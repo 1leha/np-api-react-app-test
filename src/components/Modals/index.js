@@ -1,1 +1,2 @@
-export { default } from './HistoryModal';
+export * from './HistoryModal';
+export * from './MapModal';
