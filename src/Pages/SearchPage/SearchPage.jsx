@@ -18,13 +18,15 @@ import HistoryModal from 'components/Modals/HistoryModal';
 import { StyledSearchPage, StyledSearchPageResults } from './SearchPage.styled';
 // import Status from 'components/Status';
 import History from 'components/History';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchTtn } from 'redux/ttn/ttnOperations';
 import { Outlet, useNavigate, useParams } from 'react-router';
+import { sellectIsTtnListEmpty } from 'redux/ttn/ttnSellectors';
 // import PropTypes from 'prop-types';
 
 const SearchPage = () => {
   const [ttnValue, setTtnValue] = useState('');
+  const isTtnListEmpty = useSelector(sellectIsTtnListEmpty);
 
   const {
     register,
@@ -36,10 +38,10 @@ const SearchPage = () => {
   const dispatch = useDispatch();
   const { ttnId } = useParams();
 
-  // console.log('ttnId :>> ', ttnId);
+  console.log('ttnId :>> ', ttnId);
 
   useEffect(() => {
-    setTtnValue(ttnId);
+    ttnId && setTtnValue(ttnId);
 
     return () => {
       setTtnValue('');
@@ -65,9 +67,6 @@ const SearchPage = () => {
   };
 
   const handlerInput = e => {
-    // console.log('isNaN >>> ', Number.isNaN(+e.target.value));
-    // console.log('value >>> ', e.target.value.length);
-    // console.log('ttnValue >>> ', ttnValue.length);
     if (e.target.value.length > 14 || Number.isNaN(+e.target.value)) {
       e.target.value = ttnValue;
       return;
@@ -152,7 +151,7 @@ const SearchPage = () => {
         {/* Result */}
 
         {/* <Status /> */}
-        {ttnId ? (
+        {ttnId && !isTtnListEmpty ? (
           <Outlet />
         ) : (
           <Paper sx={{ mt: 3, p: 2 }}>
