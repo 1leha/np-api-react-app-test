@@ -3,36 +3,34 @@ import DummyMessage from 'components/Dummies/DummyMessage';
 import PostOfficeFilter from 'components/PostOfficeFilter';
 import PostOfficesLTable from 'components/PostOfficesLTable';
 import { useCustomQueries } from 'hooks';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchCities } from 'redux/postOffices/City/cityOperations';
 import {
   sellectCity,
-  sellectNormalisedCity,
+  sellectCityIsLoading,
 } from 'redux/postOffices/postOfficeSellectors';
 import { message } from 'utils/messages';
-import {
-  StyledAutocompleteListItem,
-  StyledFilters,
-  StyledPostOfficesPage,
-} from './PostOfficesPage.styled';
+import { StyledFilters, StyledPostOfficesPage } from './PostOfficesPage.styled';
+import CircularProgress from '@mui/material/CircularProgress';
+
 // import PropTypes from 'prop-types'
 
 const PostOfficesPage = () => {
   const [city, setCity] = useState(null);
+  const [open, setOpen] = useState(false);
   const [loadCapacity, setLoadCapacity] = useState(null);
   const dispatch = useDispatch();
   const { officeId } = useParams();
-
-  useEffect(() => {
-    dispatch(fetchCities());
-  }, [dispatch]);
-
   const allCities = useSelector(sellectCity);
-  const normalisedCity = useSelector(sellectNormalisedCity);
-  // console.log('allCities :>> ', allCities.length);
-  // console.log('normalisedCity :>> ', normalisedCity);
+  const cityIsLoading = useSelector(sellectCityIsLoading);
+
+  // useEffect(() => {
+  //   dispatch(fetchCities());
+  // }, [dispatch]);
+
+  console.log('cityIsLoading :>> ', cityIsLoading);
 
   const getCity = newCity => {
     setCity(newCity);
@@ -41,11 +39,6 @@ const PostOfficesPage = () => {
   const getCargo = cargo => {
     setLoadCapacity(cargo);
     console.log('cargo :>> ', cargo);
-  };
-
-  const defaultProps = {
-    options: allCities,
-    getOptionLabel: city => city.Ref,
   };
 
   const { mobile, tablet, desktop } = useCustomQueries();
@@ -59,13 +52,21 @@ const PostOfficesPage = () => {
           <PostOfficeFilter />
 
           <Autocomplete
-            // disablePortal
-            // {...defaultProps}
-            // autoComplete
+            disablePortal
+            autoComplete
             clearOnEscape
             filterSelectedOptions
             id="city"
             value={city}
+            open={open}
+            onOpen={() => {
+              setOpen(true);
+              if (allCities.length === 0) dispatch(fetchCities());
+            }}
+            onClose={() => {
+              setOpen(false);
+            }}
+            loading={cityIsLoading}
             options={allCities.map(({ Ref, Description }) => ({
               Ref,
               label: Description,
@@ -78,8 +79,27 @@ const PostOfficesPage = () => {
                 </Box>
               );
             }}
+            isOptionEqualToValue={(option, value) =>
+              option.title === value.title
+            }
             renderInput={params => {
-              return <TextField {...params} label="Населений пункт" />;
+              return (
+                <TextField
+                  {...params}
+                  label="Населений пункт"
+                  InputProps={{
+                    ...params.InputProps,
+                    endAdornment: (
+                      <>
+                        {cityIsLoading ? (
+                          <CircularProgress color="inherit" size={20} />
+                        ) : null}
+                        {params.InputProps.endAdornment}
+                      </>
+                    ),
+                  }}
+                />
+              );
             }}
             onChange={(_, newCity) => getCity(newCity)}
           />

@@ -32,6 +32,8 @@ const citySlice = createSlice({
         }));
         // console.log('allCities :>> ', allCities[1313]);
         state.items = [...allCities];
+        state.isLoading = false;
+        state.error = payload;
       })
       .addCase(fetchCities.rejected, (state, { payload }) => {
         state.isLoading = false;
