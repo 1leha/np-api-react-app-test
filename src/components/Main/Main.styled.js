@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const StyledMain = styled.main`
-  padding-top: ${p => p.theme.space[5]}px;
+  padding-top: ${p => p.theme.space[3]}px;
+  padding-bottom: ${p => p.theme.space[4]}px;
 
   flex: 1 1 auto;
 

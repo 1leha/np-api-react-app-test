@@ -54,6 +54,7 @@ const HistoryHeader = ({ onClose }) => {
         >
           Історія ТТН
         </Typography>
+
         <Tooltip title="Видалити усі ТТН" arrow>
           <IconButton
             edge="end"
