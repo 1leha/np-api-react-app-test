@@ -7,9 +7,10 @@ import {
 } from '@mui/material';
 import Filter from 'components/Filter';
 import PostOfficeDetales from 'components/PostOfficeDetales';
+import PostOfficeFilter from 'components/PostOfficeFilter';
 import PostOfficesLTable from 'components/PostOfficesLTable';
 import React, { useState } from 'react';
-import { StyledPostOfficesPage } from './PostOfficesPage.styled';
+import { StyledFilters, StyledPostOfficesPage } from './PostOfficesPage.styled';
 // import PropTypes from 'prop-types'
 
 const PostOfficesPage = () => {
@@ -32,11 +33,11 @@ const PostOfficesPage = () => {
   return (
     <StyledPostOfficesPage mediaQuery={tablet || desktop}>
       {/* Post Filrer */}
-      <Paper elevation={3}>
+      <Paper elevation={3} sx={{ flex: '1 1 30%', p: 2 }}>
         {/* Filrer */}
-        <div>
-          <Filter />
-          <Divider />
+        <StyledFilters>
+          <PostOfficeFilter />
+
           <Autocomplete
             disablePortal
             id="city"
@@ -47,7 +48,7 @@ const PostOfficesPage = () => {
             }}
             onChange={(e, newCity) => getCity(newCity)}
           />
-          <Divider />
+
           <Autocomplete
             disablePortal
             id="loadCapacity"
@@ -56,15 +57,13 @@ const PostOfficesPage = () => {
             renderInput={params => <TextField {...params} label="Вантаж" />}
             onChange={(e, cargo) => getCargo(cargo)}
           />
-          <Divider />
-        </div>
+        </StyledFilters>
 
         {/* Table */}
         <PostOfficesLTable />
       </Paper>
 
       {/* Post Detales */}
-
       {tablet && <PostOfficeDetales />}
     </StyledPostOfficesPage>
   );

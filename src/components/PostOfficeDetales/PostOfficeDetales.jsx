@@ -1,9 +1,12 @@
-import { Divider, Paper, Typography } from '@mui/material';
+import { Paper, Typography } from '@mui/material';
+import DummyMessage from 'components/Dummies';
 import { useCustomQueries } from 'hooks';
 import React from 'react';
+import { message } from 'utils/messages';
 import {
   StyledCityType,
   StyledDetales,
+  StyledDetalesInfo,
   StyledMaxWeight,
   StyledNumberStatusWrapper,
   StyledOfficeDescriptionWrapper,
@@ -24,15 +27,18 @@ const PostOfficeDetales = () => {
     Longitude: '31.250970000000000',
     Latitude: '50.498109000000000',
   };
+  const postData = false;
+  const { mobile, tablet, desktop } = useCustomQueries();
 
-  const { mobile, tablet } = useCustomQueries();
-
-  return (
-    <Paper elevation={3} sx={{ p: mobile ? 0 : 0 }}>
+  return postData ? (
+    <Paper
+      elevation={3}
+      sx={{ flex: tablet || desktop ? '1 1 70%' : '1 1 auto' }}
+    >
       <StyledPostOfficeDetalesWrapper mobile>
         {/* Detales */}
         <StyledDetales>
-          <div>
+          <StyledDetalesInfo>
             <StyledNumberStatusWrapper tablet>
               {tablet && (
                 <StyledPostOfficeNumber>Number</StyledPostOfficeNumber>
@@ -55,9 +61,9 @@ const PostOfficeDetales = () => {
                 Телефон: <StyledOfficePhone>Phone</StyledOfficePhone>
               </p>
             </StyledOfficeDescriptionWrapper>
-          </div>
-          <Divider orientation="vertical" flexItem />
+          </StyledDetalesInfo>
 
+          {/* work time */}
           <StyledWorkHoursWrapper>
             <Typography
               sx={{ mb: 2, lineHeight: 1.1 }}
@@ -117,6 +123,8 @@ const PostOfficeDetales = () => {
         </div>
       </StyledPostOfficeDetalesWrapper>
     </Paper>
+  ) : (
+    <DummyMessage>{message.noPostOfficeData}</DummyMessage>
   );
 };
 

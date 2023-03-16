@@ -4,7 +4,6 @@ export const StyledPostOfficeDetalesWrapper = styled.div`
   display: flex;
   flex-direction: ${p => (p.tablet ? 'row' : 'column')};
   justify-content: space-between;
-  /* width: 100%; */
   gap: ${p => p.theme.space[4]}px;
 
   color: ${p => p.theme.colors.primary};
@@ -23,10 +22,17 @@ export const StyledDetales = styled.div`
   /* border: 3px solid red; */
 `;
 
+export const StyledDetalesInfo = styled.div`
+  flex: 1 1 75%;
+
+  /* background-color: tomato; */
+  /* border: 3px solid red; */
+`;
+
 export const StyledNumberStatusWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   gap: ${p => p.theme.space[4]}px;
 
   margin-bottom: ${p => p.theme.space[4]}px;
@@ -45,6 +51,10 @@ export const StyledPostOfficeStatus = styled.p`
   font-weight: ${p => p.theme.fontWeights.normal};
 
   color: ${p => p.theme.colors.officeOpen};
+
+  @media (min-width: 768px) {
+    font-size: ${p => p.theme.fontSizes.m};
+  }
 `;
 
 export const StyledOfficeDescriptionWrapper = styled.div`
@@ -52,6 +62,10 @@ export const StyledOfficeDescriptionWrapper = styled.div`
 
   font-size: ${p => p.theme.fontSizes.l};
   font-weight: ${p => p.theme.fontWeights.normal};
+
+  @media (min-width: 768px) {
+    font-size: ${p => p.theme.fontSizes.m};
+  }
 `;
 
 export const StyledCityType = styled.span`
@@ -68,11 +82,13 @@ export const StyledOfficePhone = styled.span`
   font-weight: ${p => p.theme.fontWeights.bold};
 `;
 
+// Work hours
 export const StyledWorkHoursWrapper = styled.div`
   flex: 0 0 25%;
 
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
+  padding-left: ${p => p.theme.space[4]}px;
+  border-left: ${p => p.theme.borders.normal};
+  border-color: ${p => p.theme.colors.primaryMiddle};
 `;
 
 export const StyledWorkHoursList = styled.ul`
@@ -86,8 +102,9 @@ export const StyledWorkHoursList = styled.ul`
   /* width: 100%; */
   gap: ${p => p.theme.space[3]}px;
 
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
+  @media (min-width: 768px) {
+    font-size: ${p => p.theme.fontSizes.m};
+  }
 `;
 
 export const StyledWorkHoursItem = styled.li`
