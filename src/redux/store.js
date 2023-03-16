@@ -11,6 +11,7 @@ import {
 import { persistedTtnReducer } from './ttn/ttnSlice';
 import { ttnFilterReducer } from './ttn/ttnFilter/ttnFilterSlice';
 import { persistedCityReducer } from './postOffices/City/citySlice';
+import { postOfficeReducer } from './postOffices/postOfficeSlice';
 
 export const store = configureStore({
   reducer: {
@@ -19,7 +20,7 @@ export const store = configureStore({
 
     city: persistedCityReducer,
 
-    // postOffice: postOfficeReducer,
+    postOffice: postOfficeReducer,
     // officeSearch: officeSearchReducer,
   },
 

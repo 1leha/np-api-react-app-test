@@ -31,9 +31,12 @@ const citySlice = createSlice({
           Description,
         }));
         // console.log('allCities :>> ', allCities[1313]);
-        state.items = [...allCities];
+        state.items = [
+          { Ref: 'all', Description: 'Усі відділення...' },
+          ...allCities,
+        ];
         state.isLoading = false;
-        state.error = payload;
+        state.error = null;
       })
       .addCase(fetchCities.rejected, (state, { payload }) => {
         state.isLoading = false;

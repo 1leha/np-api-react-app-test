@@ -10,11 +10,13 @@ import PropTypes from 'prop-types';
 const PostOfficesLTableItem = ({ data }) => {
   return (
     <StyledItemWrapper>
-      <StyledPostNumber>{data.number}</StyledPostNumber>
+      <StyledPostNumber>{data?.Number}</StyledPostNumber>
       <StyledItemDataWrapper>
-        <StyledItem>{data.name}</StyledItem>
-        <StyledItem>{data.adress}</StyledItem>
-        <StyledItem>{data.cargo}</StyledItem>
+        <StyledItem>
+          {data?.SettlementTypeDescription} {data?.CityDescription}
+        </StyledItem>
+        <StyledItem>{data?.Description}</StyledItem>
+        <StyledItem>{data?.Phone}</StyledItem>
       </StyledItemDataWrapper>
     </StyledItemWrapper>
   );
@@ -22,10 +24,11 @@ const PostOfficesLTableItem = ({ data }) => {
 
 PostOfficesLTableItem.propTypes = {
   data: PropTypes.shape({
-    number: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    adress: PropTypes.string.isRequired,
-    cargo: PropTypes.string.isRequired,
+    Number: PropTypes.string.isRequired,
+    SettlementTypeDescription: PropTypes.string.isRequired,
+    CityDescription: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    Phone: PropTypes.string.isRequired,
   }).isRequired,
 };
 

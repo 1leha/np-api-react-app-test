@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types'
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -11,38 +11,77 @@ import MapModal from 'components/Modals/MapModal';
 import { useCustomQueries } from 'hooks';
 
 import PostOfficesLTableItem from 'components/PostOfficesLTableItem';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  sellectCityRef,
+  sellectCurrentQuery,
+  sellectPage,
+  sellectPostOffice,
+  sellectTotalHits,
+} from 'redux/postOffices/postOfficeSellectors';
+import { setServerPage } from 'redux/postOffices/postOfficeSlice';
+import { fetchPostOffice } from 'redux/postOffices/postOfficeOperations';
 
 const columns = [{ id: 'name', label: 'Назва', minWidth: 420 }];
 
-function createData(number, name, adress, cargo) {
-  return { number, name, adress, cargo };
-}
+const PostOfficesLTable = () => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [actualPostId, setActualPostId] = useState(null);
 
-const rows = [
-  createData(1, 'Київ', 'Адресса 1', 'до 30 кг'),
-  createData(2, 'Київ', 'Адресса 2', 'до 30 кг'),
-  createData(3, 'Київ', 'Адресса 3', 'до 30 кг'),
-  createData(4, 'Київ', 'Адресса 4', 'до 30 кг'),
-  createData(5, 'Київ', 'Адресса 5', 'до 30 кг'),
-  createData(6, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(7, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(8, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(9, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(10, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(11, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(12, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(13, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(14, 'Київ', 'Адресса 6', 'до 30 кг'),
-];
+  const { mobile } = useCustomQueries();
 
-const PostOfficesLTable = props => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [actualPostId, setActualPostId] = React.useState(null);
+  const dispatch = useDispatch();
+  const postOffices = useSelector(sellectPostOffice);
+  // console.log('postOffices :>> ', postOffices);
 
-  const { mobile, tablet, desktop } = useCustomQueries();
+  const totalHits = useSelector(sellectTotalHits);
+  const cityRef = useSelector(sellectCityRef);
+
+  // useEffect(() => {
+  //   if (serverPage === 1) {
+  //     setActualPostOffices(postOffices);
+  //   }
+  //   setActualPostOffices(prevState => {
+  //     // console.log('prevState :>> ', prevState);
+  //     // console.log('postOffices :>> ', postOffices);
+  //     return [...prevState, ...postOffices];
+  //   });
+  // }, [serverPage, postOffices]);
+
+  // useEffect(() => {
+  //   console.log('useEffect totalHits :>> ', totalHits);
+  //   setActualPostOffices([]);
+  // }, [totalHits]);
+
+  // console.log('actualPostOffices :>> ', actualPostOffices);
+
+  useEffect(() => {
+    setPage(0);
+    dispatch(setServerPage(1));
+  }, [cityRef, dispatch]);
+
+  // console.log('currentQuery :>> ', currentQuery);
 
   const handleChangePage = (event, newPage) => {
+    // console.log('page :>> ', page);
+    // console.log('newPage :>> ', newPage);
+
+    // console.log(
+    //   'needToLoad :>> ',
+    //   postOffices.length / rowsPerPage === page + 1
+    // );
+    console.log('===================================');
+    console.log('postOffices.length :>> ', postOffices.length);
+    console.log('rowsPerPage :>> ', rowsPerPage);
+    console.log('page + 1 :>> ', page + 1);
+    console.log('===================================');
+
+    const isLoadNextPostOffices = postOffices.length / rowsPerPage === page + 1;
+    if (isLoadNextPostOffices) {
+      console.log('inrice page');
+      dispatch(setServerPage(newPage + 1));
+    }
     setPage(newPage);
   };
 
@@ -51,11 +90,7 @@ const PostOfficesLTable = props => {
     setPage(0);
   };
 
-  // const setPostId = () => {
-  //   return actualPostId;
-  // };
-
-  const handleGetPostOfficeDedeles = id => {
+  const handleGetPostOfficeDetales = id => {
     console.log('id :>> ', id);
     setActualPostId(id);
   };
@@ -79,20 +114,18 @@ const PostOfficesLTable = props => {
             </TableRow>
           </TableHead> */}
             <TableBody>
-              {rows
+              {postOffices
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
                   return (
-                    <TableRow hover key={row.number}>
+                    <TableRow hover key={row.Ref}>
                       {columns.map(column => {
                         return (
                           <TableCell
                             key={column.id}
                             align={column.align}
                             sx={{ p: 0 }}
-                            onClick={() =>
-                              handleGetPostOfficeDedeles(row.number)
-                            }
+                            onClick={() => handleGetPostOfficeDetales(row.Ref)}
                           >
                             <PostOfficesLTableItem data={row} />
                           </TableCell>
@@ -107,7 +140,7 @@ const PostOfficesLTable = props => {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={totalHits}
           rowsPerPage={rowsPerPage}
           page={page}
           labelRowsPerPage=""

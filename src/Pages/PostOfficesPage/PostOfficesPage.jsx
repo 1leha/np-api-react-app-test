@@ -3,17 +3,20 @@ import DummyMessage from 'components/Dummies/DummyMessage';
 import PostOfficeFilter from 'components/PostOfficeFilter';
 import PostOfficesLTable from 'components/PostOfficesLTable';
 import { useCustomQueries } from 'hooks';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchCities } from 'redux/postOffices/City/cityOperations';
 import {
   sellectCity,
   sellectCityIsLoading,
+  sellectCurrentQuery,
 } from 'redux/postOffices/postOfficeSellectors';
 import { message } from 'utils/messages';
 import { StyledFilters, StyledPostOfficesPage } from './PostOfficesPage.styled';
 import CircularProgress from '@mui/material/CircularProgress';
+import { fetchPostOffice } from 'redux/postOffices/postOfficeOperations';
+import { setCityRef } from 'redux/postOffices/postOfficeSlice';
 
 // import PropTypes from 'prop-types'
 
@@ -25,20 +28,30 @@ const PostOfficesPage = () => {
   const { officeId } = useParams();
   const allCities = useSelector(sellectCity);
   const cityIsLoading = useSelector(sellectCityIsLoading);
+  const currentQuery = useSelector(sellectCurrentQuery);
 
-  // useEffect(() => {
-  //   dispatch(fetchCities());
-  // }, [dispatch]);
+  // console.log('currentQuery :>> ', currentQuery);
 
-  console.log('cityIsLoading :>> ', cityIsLoading);
+  useEffect(() => {
+    dispatch(fetchPostOffice(currentQuery));
+  }, [currentQuery, dispatch]);
 
-  const getCity = newCity => {
+  // console.log('cityIsLoading :>> ', cityIsLoading);
+
+  const getCity = async newCity => {
     setCity(newCity);
-    console.log('newCity :>> ', newCity);
+    // console.log('newCity :>> ', newCity);
+    if (!newCity) {
+      dispatch(setCityRef(''));
+
+      return;
+    }
+    dispatch(setCityRef(newCity.Ref));
   };
+
   const getCargo = cargo => {
     setLoadCapacity(cargo);
-    console.log('cargo :>> ', cargo);
+    // console.log('cargo :>> ', cargo);
   };
 
   const { mobile, tablet, desktop } = useCustomQueries();
@@ -106,6 +119,7 @@ const PostOfficesPage = () => {
 
           <Autocomplete
             disablePortal
+            clearOnEscape
             id="loadCapacity"
             value={loadCapacity}
             options={['до 30 кг', 'до 1000 кг', 'понад 1000 кг']}
