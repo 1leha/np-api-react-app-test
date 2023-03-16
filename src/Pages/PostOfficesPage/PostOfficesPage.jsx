@@ -1,19 +1,38 @@
-import { Autocomplete, Paper, TextField } from '@mui/material';
+import { Autocomplete, Box, Paper, TextField } from '@mui/material';
 import DummyMessage from 'components/Dummies/DummyMessage';
 import PostOfficeFilter from 'components/PostOfficeFilter';
 import PostOfficesLTable from 'components/PostOfficesLTable';
 import { useCustomQueries } from 'hooks';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useParams } from 'react-router-dom';
+import { fetchCities } from 'redux/postOffices/City/cityOperations';
+import {
+  sellectCity,
+  sellectNormalisedCity,
+} from 'redux/postOffices/postOfficeSellectors';
 import { message } from 'utils/messages';
-import { StyledFilters, StyledPostOfficesPage } from './PostOfficesPage.styled';
+import {
+  StyledAutocompleteListItem,
+  StyledFilters,
+  StyledPostOfficesPage,
+} from './PostOfficesPage.styled';
 // import PropTypes from 'prop-types'
 
 const PostOfficesPage = () => {
   const [city, setCity] = useState(null);
   const [loadCapacity, setLoadCapacity] = useState(null);
-
+  const dispatch = useDispatch();
   const { officeId } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchCities());
+  }, [dispatch]);
+
+  const allCities = useSelector(sellectCity);
+  const normalisedCity = useSelector(sellectNormalisedCity);
+  // console.log('allCities :>> ', allCities.length);
+  // console.log('normalisedCity :>> ', normalisedCity);
 
   const getCity = newCity => {
     setCity(newCity);
@@ -22,6 +41,11 @@ const PostOfficesPage = () => {
   const getCargo = cargo => {
     setLoadCapacity(cargo);
     console.log('cargo :>> ', cargo);
+  };
+
+  const defaultProps = {
+    options: allCities,
+    getOptionLabel: city => city.Ref,
   };
 
   const { mobile, tablet, desktop } = useCustomQueries();
@@ -35,14 +59,29 @@ const PostOfficesPage = () => {
           <PostOfficeFilter />
 
           <Autocomplete
-            disablePortal
+            // disablePortal
+            // {...defaultProps}
+            // autoComplete
+            clearOnEscape
+            filterSelectedOptions
             id="city"
             value={city}
-            options={['Київ', 'Харків']}
+            options={allCities.map(({ Ref, Description }) => ({
+              Ref,
+              label: Description,
+            }))}
+            renderOption={(props, option) => {
+              // console.log(option);
+              return (
+                <Box component="li" {...props} key={option.Ref}>
+                  {option.label}
+                </Box>
+              );
+            }}
             renderInput={params => {
               return <TextField {...params} label="Населений пункт" />;
             }}
-            onChange={(e, newCity) => getCity(newCity)}
+            onChange={(_, newCity) => getCity(newCity)}
           />
 
           <Autocomplete
@@ -51,7 +90,7 @@ const PostOfficesPage = () => {
             value={loadCapacity}
             options={['до 30 кг', 'до 1000 кг', 'понад 1000 кг']}
             renderInput={params => <TextField {...params} label="Вантаж" />}
-            onChange={(e, cargo) => getCargo(cargo)}
+            onChange={(_, cargo) => getCargo(cargo)}
           />
         </StyledFilters>
 

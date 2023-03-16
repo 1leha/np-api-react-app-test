@@ -15,3 +15,14 @@ export const StyledFilters = styled.div`
 
   margin-bottom: ${p => p.theme.space[4]}px;
 `;
+
+export const StyledAutocompleteListItem = styled.li`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: ${p => p.theme.space[4]}px;
+
+  color: ${p => p.theme.colors.primary};
+
+  /* margin-bottom: ${p => p.theme.space[4]}px; */
+`;
