@@ -7,6 +7,8 @@ export const StyledPostOfficeDetalesWrapper = styled.div`
   gap: ${p => p.theme.space[4]}px;
 
   color: ${p => p.theme.colors.primary};
+
+  height: 100%;
   /* background-color: tomato; */
   /* border: 3px solid red; */
 `;
@@ -137,4 +139,28 @@ export const StyledWorkTime = styled.span`
 
   /* background-color: tomato; */
   /* border: 3px solid red; */
+`;
+
+// Map Wrapper
+export const StyledMapWrapper = styled.div`
+  flex: 1 1 auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+
+  /* padding-left: ${p => p.theme.space[4]}px;
+  border-left: ${p => p.theme.borders.normal};
+  border-color: ${p => p.theme.colors.primaryMiddle}; */
+`;
+
+export const StyledMap = styled.iframe`
+  width: 100%;
+  height: 420px;
+
+  @media (min-width: 768px) {
+    height: 100%;
+  }
 `;

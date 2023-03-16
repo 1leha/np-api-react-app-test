@@ -12,8 +12,10 @@ export const theme = {
     primaryLight: '#3E3E3E22',
     primaryMiddle: '#3E3E3E55',
     primaryAccent: '#3E3E3E99',
+
     secondary: 'white',
     brandColor: '#D00000',
+
     // fourth: '#1976d2',
     // hover: '#1976d233',
     active: '#ff1313',

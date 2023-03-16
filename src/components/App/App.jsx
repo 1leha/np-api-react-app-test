@@ -4,6 +4,7 @@ import SearchPage from 'Pages/SearchPage';
 import PostOfficesPage from 'Pages/PostOfficesPage/PostOfficesPage';
 import Status from '../Status';
 import { StyledApp } from './App.styled';
+import PostOfficeDetales from 'components/PostOfficeDetales';
 
 export const App = () => {
   return (
@@ -16,7 +17,9 @@ export const App = () => {
             <Route path=":ttnId" element={<Status />} />
           </Route>
 
-          <Route path="/post-office" element={<PostOfficesPage />} />
+          <Route path="/post-office" element={<PostOfficesPage />}>
+            <Route path=":officeId" element={<PostOfficeDetales />} />
+          </Route>
           <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>

@@ -5,12 +5,12 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { TableSortLabel } from '@mui/material';
 import MapModal from 'components/Modals/MapModal';
 import { useCustomQueries } from 'hooks';
+
+import PostOfficesLTableItem from 'components/PostOfficesLTableItem';
 
 const columns = [{ id: 'name', label: 'Назва', minWidth: 420 }];
 
@@ -63,7 +63,7 @@ const PostOfficesLTable = props => {
   return (
     <>
       <Paper sx={{ width: '100%' }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer sx={{ height: '100vh' }}>
           <Table stickyHeader aria-label="sticky table">
             {/* <TableHead>
             <TableRow>
@@ -89,16 +89,12 @@ const PostOfficesLTable = props => {
                           <TableCell
                             key={column.id}
                             align={column.align}
+                            sx={{ p: 0 }}
                             onClick={() =>
                               handleGetPostOfficeDedeles(row.number)
                             }
                           >
-                            <div>
-                              <p>{row.number}</p>
-                              <p>{row.name}</p>
-                              <p>{row.adress}</p>
-                              <p>{row.cargo}</p>
-                            </div>
+                            <PostOfficesLTableItem data={row} />
                           </TableCell>
                         );
                       })}
@@ -114,6 +110,7 @@ const PostOfficesLTable = props => {
           count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
+          labelRowsPerPage=""
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />

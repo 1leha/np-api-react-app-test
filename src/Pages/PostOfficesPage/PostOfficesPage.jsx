@@ -1,21 +1,19 @@
-import {
-  Autocomplete,
-  Divider,
-  Paper,
-  TextField,
-  useMediaQuery,
-} from '@mui/material';
-import Filter from 'components/Filter';
-import PostOfficeDetales from 'components/PostOfficeDetales';
+import { Autocomplete, Paper, TextField } from '@mui/material';
+import DummyMessage from 'components/Dummies/DummyMessage';
 import PostOfficeFilter from 'components/PostOfficeFilter';
 import PostOfficesLTable from 'components/PostOfficesLTable';
+import { useCustomQueries } from 'hooks';
 import React, { useState } from 'react';
+import { Outlet, useParams } from 'react-router-dom';
+import { message } from 'utils/messages';
 import { StyledFilters, StyledPostOfficesPage } from './PostOfficesPage.styled';
 // import PropTypes from 'prop-types'
 
 const PostOfficesPage = () => {
   const [city, setCity] = useState(null);
   const [loadCapacity, setLoadCapacity] = useState(null);
+
+  const { officeId } = useParams();
 
   const getCity = newCity => {
     setCity(newCity);
@@ -26,14 +24,12 @@ const PostOfficesPage = () => {
     console.log('cargo :>> ', cargo);
   };
 
-  // const mobile = useMediaQuery('(max-width:767px)');
-  const tablet = useMediaQuery('(min-width:768px)');
-  const desktop = useMediaQuery('(min-width:1200px)');
+  const { mobile, tablet, desktop } = useCustomQueries();
 
   return (
     <StyledPostOfficesPage mediaQuery={tablet || desktop}>
       {/* Post Filrer */}
-      <Paper elevation={3} sx={{ flex: '1 1 30%', p: 2 }}>
+      <Paper elevation={3} sx={{ flex: desktop ? '1 1 30%' : '1 1 50%', p: 2 }}>
         {/* Filrer */}
         <StyledFilters>
           <PostOfficeFilter />
@@ -64,7 +60,13 @@ const PostOfficesPage = () => {
       </Paper>
 
       {/* Post Detales */}
-      {tablet && <PostOfficeDetales />}
+
+      {tablet &&
+        (officeId ? (
+          <Outlet />
+        ) : (
+          <DummyMessage>{message.noPostOfficeData}</DummyMessage>
+        ))}
     </StyledPostOfficesPage>
   );
 };
