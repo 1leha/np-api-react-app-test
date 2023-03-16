@@ -11,6 +11,7 @@ export const theme = {
     primary: '#3E3E3E',
     primaryLight: '#3E3E3E22',
     primaryMiddle: '#3E3E3E55',
+    primaryAccent: '#3E3E3E99',
     secondary: 'white',
     brandColor: '#D00000',
     // fourth: '#1976d2',
@@ -20,6 +21,10 @@ export const theme = {
 
     statusNotFound: '#FFD4D4',
     statusDone: '#00D1D111',
+
+    officeOpen: '#00D18B',
+    officeClose: '#D00000',
+    officeUnavailable: '#3E3E3E88',
     // unfocused: '#1976d211',
 
     // titleBG: '#65472e',
