@@ -5,7 +5,7 @@ export const StyledFooter = styled.footer`
 
   @media (min-width: 768px) {
     display: block;
-    flex: 0 0 auto;
+    flex: 0 0 10%;
 
     padding-top: ${p => p.theme.space[4]}px;
     padding-bottom: ${p => p.theme.space[4]}px;

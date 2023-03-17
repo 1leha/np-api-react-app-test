@@ -4,14 +4,15 @@ import styled from 'styled-components';
 export const StyledHeader = styled.header`
   width: 100%;
 
-  flex: 1 1 auto;
-
+  flex: 0 0 10%;
   border-bottom: ${p => p.theme.borders.bold};
   border-color: ${p => p.theme.colors.primaryLight};
 
   @media screen and (min-width: 768px) {
     border-bottom: none;
   }
+
+  border: solid 3px black;
 `;
 
 export const StyledHeaderNav = styled.nav`

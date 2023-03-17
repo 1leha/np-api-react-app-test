@@ -75,8 +75,8 @@ const PostOfficesLTable = () => {
       {postOfficeIsLoading ? (
         <FullscreenSpiner />
       ) : (
-        <Paper sx={{ width: '100%', height: '104ch' }}>
-          <TableContainer sx={{ width: '100%', height: '98ch' }}>
+        <Paper sx={{ width: '100%' }}>
+          <TableContainer sx={{ width: '100%' }}>
             <Table aria-label="sticky table">
               <TableBody>
                 {postOffices.map(row => {
