@@ -63,10 +63,10 @@ const PostOfficesLTable = () => {
     setPage(0);
   };
 
-  const handleGetPostOfficeDetales = id => {
-    console.log('id :>> ', id);
-    setActualPostId(id);
-    navigate(`/post-office/${id}`);
+  const handleGetPostOfficeDetales = ({ Ref, Number }) => {
+    // console.log('id :>> ', id);
+    setActualPostId(Number);
+    navigate(`/post-office/${Ref}`);
   };
 
   return (
@@ -86,7 +86,7 @@ const PostOfficesLTable = () => {
                             key={column.id}
                             align={column.align}
                             sx={{ p: 0 }}
-                            onClick={() => handleGetPostOfficeDetales(row.Ref)}
+                            onClick={() => handleGetPostOfficeDetales(row)}
                           >
                             <PostOfficesLTableItem data={row} />
                           </TableCell>
@@ -108,10 +108,10 @@ const PostOfficesLTable = () => {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+        {mobile && (
+          <MapModal postId={actualPostId} setActualPostId={setActualPostId} />
+        )}
       </Paper>
-      {mobile && (
-        <MapModal postId={actualPostId} setActualPostId={setActualPostId} />
-      )}
     </>
   );
 };
