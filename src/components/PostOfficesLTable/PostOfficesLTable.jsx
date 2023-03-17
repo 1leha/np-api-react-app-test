@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types'
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,9 +13,7 @@ import PostOfficesLTableItem from 'components/PostOfficesLTableItem';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   sellectCityRef,
-  sellectHitsPerPage,
   sellectPostOffice,
-  sellectSortedPostOffice,
   sellectTotalHits,
 } from 'redux/postOffices/postOfficeSellectors';
 import {
@@ -43,27 +40,18 @@ const PostOfficesLTable = () => {
 
   console.log('page :>> ', page);
 
-  // Reset pages if new City select
+  // Effect page changing
   useEffect(() => {
     dispatch(setServerPage(page + 1));
   }, [page, dispatch]);
 
-  // Reset pages if new City select
+  // Effect reset pages if new City select
   useEffect(() => {
     setPage(0);
     dispatch(setServerPage(1));
   }, [cityRef, dispatch]);
 
-  const handleChangePage = (event, newPage) => {
-    // console.log('object :>> ', object);
-
-    // if (condition) {
-    // }
-
-    // const isLoadNextPostOffices = postOffices.length / rowsPerPage === page + 1;
-    // if (isLoadNextPostOffices) {
-    //   dispatch(setServerPage(newPage + 1));
-    // }
+  const handleChangePage = (_, newPage) => {
     setPage(newPage);
   };
 
@@ -123,7 +111,5 @@ const PostOfficesLTable = () => {
     </>
   );
 };
-
-// PostOfficesLTable.propTypes = {};
 
 export default PostOfficesLTable;
