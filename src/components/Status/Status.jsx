@@ -1,19 +1,18 @@
-import { Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { sellectCurrentTtn } from 'redux/ttn/ttnSellectors';
 import { StyledStatus } from './Status.styled';
-// import PropTypes from 'prop-types'
 
 const Status = () => {
   const ttnData = useSelector(sellectCurrentTtn);
 
   return (
     <StyledStatus>
-      <Typography sx={{ mt: 3, mb: 2 }} variant="h6" component="div">
+      <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
         Інформація про відправлення
       </Typography>
-
+      <Divider sx={{ mb: 2 }} />
       {ttnData.StatusCode !== '3' ? (
         <>
           <p>Статус доставки: {ttnData.Status}</p>
@@ -28,7 +27,5 @@ const Status = () => {
     </StyledStatus>
   );
 };
-
-// Status.propTypes = {}
 
 export default Status;

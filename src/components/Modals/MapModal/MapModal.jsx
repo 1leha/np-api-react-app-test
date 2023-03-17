@@ -1,5 +1,4 @@
 import Dialog from '@mui/material/Dialog';
-
 import Slide from '@mui/material/Slide';
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { forwardRef, useEffect, useState } from 'react';
@@ -23,28 +22,13 @@ export default function MapModal({ postId, setActualPostId }) {
   // media queries
   const { mobile } = useCustomQueries();
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
   const handleClose = () => {
     setOpen(false);
     setActualPostId(null);
   };
 
-  // postId && setOpen(true);
-
   return (
     <>
-      {/* <Button
-        fullWidth
-        variant="outlined"
-        onClick={handleClickOpen}
-        size="large"
-        sx={{ height: '56px' }}
-      >
-        Історія ТТН
-      </Button> */}
       <Dialog
         fullScreen
         open={open}

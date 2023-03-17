@@ -23,6 +23,4 @@ export const StyledAutocompleteListItem = styled.li`
   gap: ${p => p.theme.space[4]}px;
 
   color: ${p => p.theme.colors.primary};
-
-  /* margin-bottom: ${p => p.theme.space[4]}px; */
 `;

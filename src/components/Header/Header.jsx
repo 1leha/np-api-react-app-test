@@ -8,7 +8,6 @@ import {
   StyledHeaderTabs,
   StyledTab,
 } from './Header.styled';
-// import PropTypes from 'prop-types'
 
 const Header = () => {
   return (
@@ -32,7 +31,5 @@ const Header = () => {
     </StyledHeader>
   );
 };
-
-// Header.propTypes = {}
 
 export default Header;

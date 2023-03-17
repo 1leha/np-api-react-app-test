@@ -1,11 +1,7 @@
 import React, { useCallback } from 'react';
 import debounce from 'lodash.debounce';
-
-// // Redux
 import { useDispatch, useSelector } from 'react-redux';
-
 import SearchIcon from '@mui/icons-material/Search';
-//components
 import {
   Search,
   SearchIconWrapper,
@@ -14,8 +10,6 @@ import {
 import { setSearchString } from 'redux/postOffices/postOfficeSlice';
 import { sellectSearchString } from 'redux/postOffices/postOfficeSellectors';
 import { message } from 'utils/messages';
-
-// icons
 
 const PostOfficeFilter = () => {
   const dispatch = useDispatch();

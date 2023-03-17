@@ -1,13 +1,6 @@
 import React from 'react';
-
-// // Redux
 import { useDispatch, useSelector } from 'react-redux';
-
 import SearchIcon from '@mui/icons-material/Search';
-
-// icons
-
-//components
 import { Search, SearchIconWrapper, StyledInputBase } from './Filter.styled';
 import { sellectTtnFilter } from 'redux/ttn/ttnSellectors';
 import { inputFilterTtn } from 'redux/ttn/ttnFilter/ttnFilterSlice';
@@ -17,7 +10,6 @@ const Filter = () => {
 
   const filter = useSelector(sellectTtnFilter);
 
-  // Filter methods
   const handleChangeFilter = e => {
     if (e.target.value.length > 14 || Number.isNaN(+e.target.value)) {
       return;

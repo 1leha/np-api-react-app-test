@@ -21,7 +21,6 @@ export const store = configureStore({
     city: persistedCityReducer,
 
     postOffice: postOfficeReducer,
-    // officeSearch: officeSearchReducer,
   },
 
   middleware: getDefaultMiddleware =>

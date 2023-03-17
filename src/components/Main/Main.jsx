@@ -1,7 +1,7 @@
 import Container from 'components/common/Container';
 import React from 'react';
 import { StyledMain, StyledMainContent } from './Main.styled';
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 const Main = ({ children }) => {
   return (
@@ -13,6 +13,6 @@ const Main = ({ children }) => {
   );
 };
 
-// Main.propTypes = {}
+Main.propTypes = { children: PropTypes.any };
 
 export default Main;

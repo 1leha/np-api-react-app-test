@@ -9,8 +9,6 @@ export const StyledPostOfficeDetalesWrapper = styled.div`
   color: ${p => p.theme.colors.primary};
 
   height: 100%;
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;
 
 export const StyledDetales = styled.div`
@@ -19,28 +17,18 @@ export const StyledDetales = styled.div`
   gap: ${p => p.theme.space[4]}px;
 
   padding: ${p => p.theme.space[4]}px;
-
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;
 
 export const StyledDetalesInfo = styled.div`
   flex: 1 1 75%;
-
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;
 
 export const StyledNumberStatusWrapper = styled.div`
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
   gap: ${p => p.theme.space[4]}px;
 
   margin-bottom: ${p => p.theme.space[4]}px;
-
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;
 
 export const StyledPostOfficeNumber = styled.p`
@@ -101,7 +89,6 @@ export const StyledWorkHoursList = styled.ul`
   list-style: none;
   padding: ${p => p.theme.space[0]}px;
   margin: ${p => p.theme.space[0]}px;
-  /* width: 100%; */
   gap: ${p => p.theme.space[3]}px;
 
   @media (min-width: 768px) {
@@ -118,27 +105,18 @@ export const StyledWorkHoursItem = styled.li`
   padding: ${p => p.theme.space[0]}px;
   /* width: 100%; */
   gap: ${p => p.theme.space[0]}px;
-
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;
 
 export const StyledWeekDay = styled.span`
   font-weight: ${p => p.theme.fontWeights.bold};
   margin-bottom: ${p => p.theme.space[1]}px;
   color: ${p => p.theme.colors.primaryAccent};
-
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;
 
 export const StyledWorkTime = styled.span`
   font-weight: ${p => p.theme.fontWeights.normal};
 
   color: ${p => p.theme.colors.primary};
-
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;
 
 // Map Wrapper
@@ -149,11 +127,7 @@ export const StyledMapWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  height: 100%;
-
-  /* padding-left: ${p => p.theme.space[4]}px;
-  border-left: ${p => p.theme.borders.normal};
-  border-color: ${p => p.theme.colors.primaryMiddle}; */
+  height: 100vh;
 `;
 
 export const StyledMap = styled.iframe`

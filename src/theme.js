@@ -14,6 +14,8 @@ export const theme = {
     primaryAccent: '#3E3E3E99',
 
     secondary: 'white',
+    third: '#008BD1',
+
     brandColor: '#D00000',
 
     // fourth: '#1976d2',
@@ -21,8 +23,10 @@ export const theme = {
     active: '#ff1313',
     hoverTab: '#FFD4D4',
 
-    statusNotFound: '#FFD4D4',
+    statusNotFound: '#FFD4D455',
     statusDone: '#00D1D111',
+    statusOnTheWay: '#CBD10011',
+    statusInPostOffice: '#00D1D111',
 
     officeOpen: '#00D18B',
     officeClose: '#D00000',

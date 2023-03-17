@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   sellectCityRef,
   sellectPostOffice,
+  sellectPostOfficeIsLoading,
   sellectSearchString,
   sellectTotalHits,
 } from 'redux/postOffices/postOfficeSellectors';
@@ -22,6 +23,7 @@ import {
   setServerPage,
 } from 'redux/postOffices/postOfficeSlice';
 import { useNavigate } from 'react-router-dom';
+import { FullscreenSpiner } from 'components/common/Spiners/Spiner';
 
 const columns = [{ id: 'name', label: 'Назва', minWidth: 420 }];
 
@@ -39,6 +41,7 @@ const PostOfficesLTable = () => {
   const totalHits = useSelector(sellectTotalHits);
   const cityRef = useSelector(sellectCityRef);
   const searchString = useSelector(sellectSearchString);
+  const postOfficeIsLoading = useSelector(sellectPostOfficeIsLoading);
 
   // Effect page changing
   useEffect(() => {
@@ -69,45 +72,50 @@ const PostOfficesLTable = () => {
 
   return (
     <>
-      <Paper sx={{ width: '100%' }}>
-        <TableContainer sx={{ height: '100vh' }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableBody>
-              {postOffices.map(row => {
-                return (
-                  <TableRow hover key={row.Ref}>
-                    {columns.map(column => {
-                      return (
-                        <TableCell
-                          key={column.id}
-                          align={column.align}
-                          sx={{ p: 0 }}
-                          onClick={() => handleGetPostOfficeDetales(row)}
-                        >
-                          <PostOfficesLTableItem data={row} />
-                        </TableCell>
-                      );
-                    })}
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={totalHits}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          labelRowsPerPage=""
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
-        {mobile && (
-          <MapModal postId={actualPostId} setActualPostId={setActualPostId} />
-        )}
-      </Paper>
+      {postOfficeIsLoading ? (
+        <FullscreenSpiner />
+      ) : (
+        <Paper sx={{ width: '100%', height: '104ch' }}>
+          <TableContainer sx={{ width: '100%', height: '98ch' }}>
+            <Table aria-label="sticky table">
+              <TableBody>
+                {postOffices.map(row => {
+                  return (
+                    <TableRow hover key={row.Ref}>
+                      {columns.map(column => {
+                        return (
+                          <TableCell
+                            key={column.id}
+                            align={column.align}
+                            sx={{ p: 0 }}
+                            onClick={() => handleGetPostOfficeDetales(row)}
+                          >
+                            <PostOfficesLTableItem data={row} />
+                          </TableCell>
+                        );
+                      })}
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            sx={{ p: 0 }}
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={totalHits}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            labelRowsPerPage=""
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
+          {mobile && (
+            <MapModal postId={actualPostId} setActualPostId={setActualPostId} />
+          )}
+        </Paper>
+      )}
     </>
   );
 };

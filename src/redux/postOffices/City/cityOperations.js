@@ -20,7 +20,6 @@ export const fetchCities = createAsyncThunk(
 
     try {
       const response = await cityApi(axiosCityConfig);
-      // console.log('fetchCities response :>> ', response.data.data);
       return await response.data.data;
     } catch (error) {
       console.log('error :>> ', error);

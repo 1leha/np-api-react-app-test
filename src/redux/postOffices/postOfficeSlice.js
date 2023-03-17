@@ -41,16 +41,7 @@ const postOfficeSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchPostOffice.fulfilled, (state, { payload }) => {
-        // console.log('payload :>> ', payload.data);
-
         const totalCount = payload.info.totalCount;
-
-        // if (totalCount === state.totalHits) {
-        //   // console.log('totalCount :>> ', totalCount);
-        //   state.items.push(...payload.data);
-        //   return;
-        // }
-
         state.totalHits = totalCount;
         state.items = payload.data;
 

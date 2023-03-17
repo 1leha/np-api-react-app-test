@@ -18,8 +18,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import { fetchPostOffice } from 'redux/postOffices/postOfficeOperations';
 import { setCityRef } from 'redux/postOffices/postOfficeSlice';
 
-// import PropTypes from 'prop-types'
-
 const PostOfficesPage = () => {
   const [city, setCity] = useState(null);
   const [open, setOpen] = useState(false);
@@ -49,7 +47,7 @@ const PostOfficesPage = () => {
   return (
     <StyledPostOfficesPage mediaQuery={tablet || desktop}>
       {/* Post Filrer */}
-      <Paper elevation={3} sx={{ flex: desktop ? '1 1 30%' : '1 1 50%', p: 2 }}>
+      <Paper elevation={3} sx={{ flex: desktop ? '1 1 35%' : '1 1 50%', p: 2 }}>
         {/* Filrer */}
         <StyledFilters>
           <PostOfficeFilter />
@@ -75,7 +73,6 @@ const PostOfficesPage = () => {
               label: Description,
             }))}
             renderOption={(props, option) => {
-              // console.log(option);
               return (
                 <Box component="li" {...props} key={option.Ref}>
                   {option.label}
@@ -106,22 +103,6 @@ const PostOfficesPage = () => {
             }}
             onChange={(_, newCity) => getCity(newCity)}
           />
-
-          {/* <Autocomplete
-            disablePortal
-            autoComplete
-            clearOnEscape
-            id="loadCapacity"
-            value={loadCapacity}
-            options={CARGO_LOAD}
-            renderInput={params => (
-              <TextField {...params} label={message.cargoCapasity} />
-            )}
-            onChange={(_, option) => getCargo(option)}
-            isOptionEqualToValue={(option, value) =>
-              option.title === value.title
-            }
-          /> */}
         </StyledFilters>
 
         {/* Table */}
@@ -129,7 +110,7 @@ const PostOfficesPage = () => {
       </Paper>
 
       {/* Post Detales */}
-      <Paper elevation={3} sx={{ flex: desktop ? '1 1 70%' : '1 1 50%', p: 0 }}>
+      <Paper elevation={3} sx={{ flex: desktop ? '1 1 65%' : '1 1 50%', p: 0 }}>
         {!mobile &&
           (officeId ? (
             <Outlet />
@@ -140,7 +121,5 @@ const PostOfficesPage = () => {
     </StyledPostOfficesPage>
   );
 };
-
-// PostOffices.propTypes = {}
 
 export default PostOfficesPage;
