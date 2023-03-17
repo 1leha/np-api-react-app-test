@@ -5,11 +5,10 @@ const initialPostOffice = {
   items: [],
   isLoading: false,
   error: null,
-  hitsPerPage: 10,
   totalHits: 0,
-  cargoCapacity: 0,
   currentQuery: {
     page: 1,
+    hitsPerPage: 10,
     cityRef: '',
     searchString: '',
   },
@@ -23,16 +22,16 @@ const postOfficeSlice = createSlice({
       state.currentQuery.page = payload;
     },
 
+    setHitsPerPage(state, { payload }) {
+      state.currentQuery.hitsPerPage = payload;
+    },
+
     setCityRef(state, { payload }) {
       state.currentQuery.cityRef = payload;
     },
 
     setSearchString(state, { payload }) {
       state.currentQuery.searchString = payload;
-    },
-
-    setcargoCapacity(state, { payload }) {
-      state.cargoCapacity = payload;
     },
   },
 
@@ -46,11 +45,11 @@ const postOfficeSlice = createSlice({
 
         const totalCount = payload.info.totalCount;
 
-        if (totalCount === state.totalHits) {
-          // console.log('totalCount :>> ', totalCount);
-          state.items.push(...payload.data);
-          return;
-        }
+        // if (totalCount === state.totalHits) {
+        //   // console.log('totalCount :>> ', totalCount);
+        //   state.items.push(...payload.data);
+        //   return;
+        // }
 
         state.totalHits = totalCount;
         state.items = payload.data;
@@ -65,7 +64,7 @@ const postOfficeSlice = createSlice({
   },
 });
 
-export const { setServerPage, setCityRef, setSearchString, setcargoCapacity } =
+export const { setServerPage, setCityRef, setSearchString, setHitsPerPage } =
   postOfficeSlice.actions;
 
 export const postOfficeReducer = postOfficeSlice.reducer;

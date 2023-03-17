@@ -14,11 +14,16 @@ import PostOfficesLTableItem from 'components/PostOfficesLTableItem';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   sellectCityRef,
+  sellectHitsPerPage,
   sellectPostOffice,
   sellectSortedPostOffice,
   sellectTotalHits,
 } from 'redux/postOffices/postOfficeSellectors';
-import { setServerPage } from 'redux/postOffices/postOfficeSlice';
+import {
+  setHitsPerPage,
+  setServerPage,
+} from 'redux/postOffices/postOfficeSlice';
+import { useNavigate } from 'react-router-dom';
 
 const columns = [{ id: 'name', label: 'Назва', minWidth: 420 }];
 
@@ -30,40 +35,39 @@ const PostOfficesLTable = () => {
   const { mobile } = useCustomQueries();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const postOffices = useSelector(sellectPostOffice);
-  const sortedPostOffices = useSelector(sellectSortedPostOffice);
-
-  console.log('sortedPostOffices :>> ', sortedPostOffices);
-
   const totalHits = useSelector(sellectTotalHits);
   const cityRef = useSelector(sellectCityRef);
 
   // Reset pages if new City select
-  useEffect(() => {
-    setPage(0);
-    dispatch(setServerPage(1));
-  }, [cityRef, dispatch]);
+  // useEffect(() => {
+  //   setPage(0);
+  //   dispatch(setServerPage(1));
+  // }, [cityRef, dispatch]);
 
   const handleChangePage = (event, newPage) => {
     const isLoadNextPostOffices = postOffices.length / rowsPerPage === page + 1;
     if (isLoadNextPostOffices) {
-      console.log('inrice page');
       dispatch(setServerPage(newPage + 1));
     }
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value);
+  const handleChangeRowsPerPage = e => {
+    const hitsPerPage = +e.target.value;
+    console.log('hitsPerPage :>> ', hitsPerPage);
+    setRowsPerPage(hitsPerPage);
+    dispatch(setHitsPerPage(hitsPerPage));
     setPage(0);
   };
 
   const handleGetPostOfficeDetales = id => {
     console.log('id :>> ', id);
     setActualPostId(id);
+    navigate(`/post-office/${id}`);
   };
-
-  const offices = sortedPostOffices ? sortedPostOffices : postOffices;
 
   return (
     <>
@@ -71,7 +75,7 @@ const PostOfficesLTable = () => {
         <TableContainer sx={{ height: '100vh' }}>
           <Table stickyHeader aria-label="sticky table">
             <TableBody>
-              {offices
+              {postOffices
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
                   return (

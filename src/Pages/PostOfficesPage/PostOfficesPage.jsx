@@ -5,7 +5,7 @@ import PostOfficesLTable from 'components/PostOfficesLTable';
 import { useCustomQueries } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { fetchCities } from 'redux/postOffices/City/cityOperations';
 import {
   sellectCity,
@@ -16,25 +16,24 @@ import { message } from 'utils/messages';
 import { StyledFilters, StyledPostOfficesPage } from './PostOfficesPage.styled';
 import CircularProgress from '@mui/material/CircularProgress';
 import { fetchPostOffice } from 'redux/postOffices/postOfficeOperations';
-import {
-  setcargoCapacity,
-  setCityRef,
-} from 'redux/postOffices/postOfficeSlice';
-import { CARGO_LOAD } from 'utils/options';
+import { setCityRef } from 'redux/postOffices/postOfficeSlice';
 
 // import PropTypes from 'prop-types'
 
 const PostOfficesPage = () => {
   const [city, setCity] = useState(null);
   const [open, setOpen] = useState(false);
-  const [loadCapacity, setLoadCapacity] = useState(null);
   const dispatch = useDispatch();
   const { officeId } = useParams();
   const allCities = useSelector(sellectCity);
   const cityIsLoading = useSelector(sellectCityIsLoading);
   const currentQuery = useSelector(sellectCurrentQuery);
 
+  const navigate = useNavigate();
+
+  console.log('currentQuery :>> ', currentQuery);
   useEffect(() => {
+    navigate('/post-office');
     dispatch(fetchPostOffice(currentQuery));
   }, [currentQuery, dispatch]);
 
@@ -48,12 +47,12 @@ const PostOfficesPage = () => {
     dispatch(setCityRef(newCity.Ref));
   };
 
-  const getCargo = cargo => {
-    const weight = cargo?.id ? cargo.id : 0;
+  // const getCargo = cargo => {
+  //   const weight = cargo?.id ? cargo.id : 0;
 
-    dispatch(setcargoCapacity(weight));
-    setLoadCapacity(cargo?.label ? cargo.label : null);
-  };
+  //   dispatch(setcargoCapacity(weight));
+  //   setLoadCapacity(cargo?.label ? cargo.label : null);
+  // };
 
   const { tablet, desktop } = useCustomQueries();
 
@@ -67,9 +66,9 @@ const PostOfficesPage = () => {
 
           <Autocomplete
             disablePortal
+            blurOnSelect
             autoComplete
             clearOnEscape
-            filterSelectedOptions
             id="city"
             value={city}
             open={open}
