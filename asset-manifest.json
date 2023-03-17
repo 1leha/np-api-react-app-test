@@ -1,13 +1,29 @@
 {
   "files": {
     "main.css": "/np-api-react-app-test/static/css/main.1c3c7c8f.css",
-    "main.js": "/np-api-react-app-test/static/js/main.f8ffdc83.js",
+    "main.js": "/np-api-react-app-test/static/js/main.c5e8febb.js",
+    "static/js/758.99d9dd69.chunk.js": "/np-api-react-app-test/static/js/758.99d9dd69.chunk.js",
+    "static/js/400.25d7bbaf.chunk.js": "/np-api-react-app-test/static/js/400.25d7bbaf.chunk.js",
+    "static/js/850.9c01e7e9.chunk.js": "/np-api-react-app-test/static/js/850.9c01e7e9.chunk.js",
+    "static/js/292.072dcb90.chunk.js": "/np-api-react-app-test/static/js/292.072dcb90.chunk.js",
+    "static/js/995.8d966d8a.chunk.js": "/np-api-react-app-test/static/js/995.8d966d8a.chunk.js",
+    "static/js/196.46e4d48f.chunk.js": "/np-api-react-app-test/static/js/196.46e4d48f.chunk.js",
+    "static/js/470.4b037463.chunk.js": "/np-api-react-app-test/static/js/470.4b037463.chunk.js",
+    "static/js/582.5d566b3a.chunk.js": "/np-api-react-app-test/static/js/582.5d566b3a.chunk.js",
     "index.html": "/np-api-react-app-test/index.html",
     "main.1c3c7c8f.css.map": "/np-api-react-app-test/static/css/main.1c3c7c8f.css.map",
-    "main.f8ffdc83.js.map": "/np-api-react-app-test/static/js/main.f8ffdc83.js.map"
+    "main.c5e8febb.js.map": "/np-api-react-app-test/static/js/main.c5e8febb.js.map",
+    "758.99d9dd69.chunk.js.map": "/np-api-react-app-test/static/js/758.99d9dd69.chunk.js.map",
+    "400.25d7bbaf.chunk.js.map": "/np-api-react-app-test/static/js/400.25d7bbaf.chunk.js.map",
+    "850.9c01e7e9.chunk.js.map": "/np-api-react-app-test/static/js/850.9c01e7e9.chunk.js.map",
+    "292.072dcb90.chunk.js.map": "/np-api-react-app-test/static/js/292.072dcb90.chunk.js.map",
+    "995.8d966d8a.chunk.js.map": "/np-api-react-app-test/static/js/995.8d966d8a.chunk.js.map",
+    "196.46e4d48f.chunk.js.map": "/np-api-react-app-test/static/js/196.46e4d48f.chunk.js.map",
+    "470.4b037463.chunk.js.map": "/np-api-react-app-test/static/js/470.4b037463.chunk.js.map",
+    "582.5d566b3a.chunk.js.map": "/np-api-react-app-test/static/js/582.5d566b3a.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1c3c7c8f.css",
-    "static/js/main.f8ffdc83.js"
+    "static/js/main.c5e8febb.js"
   ]
 }
