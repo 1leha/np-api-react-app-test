@@ -41,6 +41,13 @@ const PostOfficesLTable = () => {
   const totalHits = useSelector(sellectTotalHits);
   const cityRef = useSelector(sellectCityRef);
 
+  console.log('page :>> ', page);
+
+  // Reset pages if new City select
+  useEffect(() => {
+    dispatch(setServerPage(page + 1));
+  }, [page, dispatch]);
+
   // Reset pages if new City select
   useEffect(() => {
     setPage(0);
@@ -48,23 +55,26 @@ const PostOfficesLTable = () => {
   }, [cityRef, dispatch]);
 
   const handleChangePage = (event, newPage) => {
-    const isLoadNextPostOffices = postOffices.length / rowsPerPage === page + 1;
-    if (isLoadNextPostOffices) {
-      dispatch(setServerPage(newPage + 1));
-    }
+    // console.log('object :>> ', object);
+
+    // if (condition) {
+    // }
+
+    // const isLoadNextPostOffices = postOffices.length / rowsPerPage === page + 1;
+    // if (isLoadNextPostOffices) {
+    //   dispatch(setServerPage(newPage + 1));
+    // }
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = e => {
     const hitsPerPage = +e.target.value;
-    console.log('hitsPerPage :>> ', hitsPerPage);
     setRowsPerPage(hitsPerPage);
     dispatch(setHitsPerPage(hitsPerPage));
     setPage(0);
   };
 
   const handleGetPostOfficeDetales = ({ Ref, Number }) => {
-    // console.log('id :>> ', id);
     setActualPostId(Number);
     navigate(`/post-office/${Ref}`);
   };
@@ -75,26 +85,24 @@ const PostOfficesLTable = () => {
         <TableContainer sx={{ height: '100vh' }}>
           <Table stickyHeader aria-label="sticky table">
             <TableBody>
-              {postOffices
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(row => {
-                  return (
-                    <TableRow hover key={row.Ref}>
-                      {columns.map(column => {
-                        return (
-                          <TableCell
-                            key={column.id}
-                            align={column.align}
-                            sx={{ p: 0 }}
-                            onClick={() => handleGetPostOfficeDetales(row)}
-                          >
-                            <PostOfficesLTableItem data={row} />
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
+              {postOffices.map(row => {
+                return (
+                  <TableRow hover key={row.Ref}>
+                    {columns.map(column => {
+                      return (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{ p: 0 }}
+                          onClick={() => handleGetPostOfficeDetales(row)}
+                        >
+                          <PostOfficesLTableItem data={row} />
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>

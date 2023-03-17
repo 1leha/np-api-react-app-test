@@ -31,10 +31,6 @@ import {
 // import PropTypes from 'prop-types'
 
 const PostOfficeDetales = () => {
-  const coord = {
-    Longitude: '31.250970000000000',
-    Latitude: '50.498109000000000',
-  };
   const { officeId } = useParams();
   const navigate = useNavigate();
 

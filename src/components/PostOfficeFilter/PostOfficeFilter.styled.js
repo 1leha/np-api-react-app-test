@@ -13,7 +13,6 @@ export const Search = styled('div')(({ theme }) => ({
     borderColor: theme.palette.grey[900],
   },
   marginLeft: 0,
-  width: '100%',
 }));
 
 export const SearchIconWrapper = styled('div')(({ theme }) => ({
