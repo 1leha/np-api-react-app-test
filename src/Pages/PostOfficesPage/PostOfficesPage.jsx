@@ -5,7 +5,7 @@ import PostOfficesLTable from 'components/PostOfficesLTable';
 import { useCustomQueries } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { fetchCities } from 'redux/postOffices/City/cityOperations';
 import {
   sellectCity,
@@ -29,9 +29,7 @@ const PostOfficesPage = () => {
   const cityIsLoading = useSelector(sellectCityIsLoading);
   const currentQuery = useSelector(sellectCurrentQuery);
 
-  const navigate = useNavigate();
-
-  // console.log('currentQuery :>> ', currentQuery);
+  // Effect if query changed
   useEffect(() => {
     dispatch(fetchPostOffice(currentQuery));
   }, [currentQuery, dispatch]);
@@ -46,14 +44,7 @@ const PostOfficesPage = () => {
     dispatch(setCityRef(newCity.Ref));
   };
 
-  // const getCargo = cargo => {
-  //   const weight = cargo?.id ? cargo.id : 0;
-
-  //   dispatch(setcargoCapacity(weight));
-  //   setLoadCapacity(cargo?.label ? cargo.label : null);
-  // };
-
-  const { tablet, desktop } = useCustomQueries();
+  const { mobile, tablet, desktop } = useCustomQueries();
 
   return (
     <StyledPostOfficesPage mediaQuery={tablet || desktop}>
@@ -138,13 +129,14 @@ const PostOfficesPage = () => {
       </Paper>
 
       {/* Post Detales */}
-
-      {tablet &&
-        (officeId ? (
-          <Outlet />
-        ) : (
-          <DummyMessage>{message.noPostOfficeData}</DummyMessage>
-        ))}
+      <Paper elevation={3} sx={{ flex: desktop ? '1 1 70%' : '1 1 50%', p: 0 }}>
+        {!mobile &&
+          (officeId ? (
+            <Outlet />
+          ) : (
+            <DummyMessage>{message.noPostOfficeData}</DummyMessage>
+          ))}
+      </Paper>
     </StyledPostOfficesPage>
   );
 };

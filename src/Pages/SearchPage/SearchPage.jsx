@@ -151,22 +151,24 @@ const SearchPage = () => {
         {/* Result */}
 
         {/* <Status /> */}
-        {ttnId && !isTtnListEmpty ? (
-          <Outlet />
-        ) : (
-          <Paper sx={{ mt: 3, p: 2 }}>
-            <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
-              Інструкція.
-            </Typography>
-            <Divider />
+        <Paper sx={{ mt: 3, p: 2 }}>
+          {ttnId && !isTtnListEmpty ? (
+            <Outlet />
+          ) : (
+            <>
+              <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
+                Інструкція.
+              </Typography>
+              <Divider />
 
-            <Typography sx={{ mt: 1, mb: 1 }} component="p">
-              Для отримання інформації про відправлення введіть ТТН. ТТН номер
-              має починатися з символів 1, 2, 5 і містити тільки 14 числових
-              знаків!
-            </Typography>
-          </Paper>
-        )}
+              <Typography sx={{ mt: 1, mb: 1 }} component="p">
+                Для отримання інформації про відправлення введіть ТТН. ТТН номер
+                має починатися з символів 1, 2, 5 і містити тільки 14 числових
+                знаків!
+              </Typography>
+            </>
+          )}
+        </Paper>
 
         {/* History */}
       </StyledSearchPageResults>

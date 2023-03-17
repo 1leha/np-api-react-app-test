@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Paper } from '@mui/material';
-import { useCustomQueries } from 'hooks';
 
 const DummyMessage = ({ children }) => {
-  const { tablet, desktop } = useCustomQueries();
-
   return (
     <Paper
-      elevation={3}
+      elevation={0}
       sx={{
-        flex: tablet || desktop ? '0 0 50%' : '0 0 30%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        width: '100%',
+        height: '100%',
       }}
     >
       {children}
