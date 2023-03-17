@@ -16,7 +16,11 @@ import { message } from 'utils/messages';
 import { StyledFilters, StyledPostOfficesPage } from './PostOfficesPage.styled';
 import CircularProgress from '@mui/material/CircularProgress';
 import { fetchPostOffice } from 'redux/postOffices/postOfficeOperations';
-import { setCityRef } from 'redux/postOffices/postOfficeSlice';
+import {
+  setcargoCapacity,
+  setCityRef,
+} from 'redux/postOffices/postOfficeSlice';
+import { CARGO_LOAD } from 'utils/options';
 
 // import PropTypes from 'prop-types'
 
@@ -30,31 +34,28 @@ const PostOfficesPage = () => {
   const cityIsLoading = useSelector(sellectCityIsLoading);
   const currentQuery = useSelector(sellectCurrentQuery);
 
-  // console.log('currentQuery :>> ', currentQuery);
-
   useEffect(() => {
     dispatch(fetchPostOffice(currentQuery));
   }, [currentQuery, dispatch]);
 
-  // console.log('cityIsLoading :>> ', cityIsLoading);
-
-  const getCity = async newCity => {
+  const getCity = newCity => {
     setCity(newCity);
-    // console.log('newCity :>> ', newCity);
     if (!newCity) {
       dispatch(setCityRef(''));
-
       return;
     }
+
     dispatch(setCityRef(newCity.Ref));
   };
 
   const getCargo = cargo => {
-    setLoadCapacity(cargo);
-    // console.log('cargo :>> ', cargo);
+    const weight = cargo?.id ? cargo.id : 0;
+
+    dispatch(setcargoCapacity(weight));
+    setLoadCapacity(cargo?.label ? cargo.label : null);
   };
 
-  const { mobile, tablet, desktop } = useCustomQueries();
+  const { tablet, desktop } = useCustomQueries();
 
   return (
     <StyledPostOfficesPage mediaQuery={tablet || desktop}>
@@ -99,7 +100,7 @@ const PostOfficesPage = () => {
               return (
                 <TextField
                   {...params}
-                  label="Населений пункт"
+                  label={message.allPostOffices}
                   InputProps={{
                     ...params.InputProps,
                     endAdornment: (
@@ -117,15 +118,21 @@ const PostOfficesPage = () => {
             onChange={(_, newCity) => getCity(newCity)}
           />
 
-          <Autocomplete
+          {/* <Autocomplete
             disablePortal
+            autoComplete
             clearOnEscape
             id="loadCapacity"
             value={loadCapacity}
-            options={['до 30 кг', 'до 1000 кг', 'понад 1000 кг']}
-            renderInput={params => <TextField {...params} label="Вантаж" />}
-            onChange={(_, cargo) => getCargo(cargo)}
-          />
+            options={CARGO_LOAD}
+            renderInput={params => (
+              <TextField {...params} label={message.cargoCapasity} />
+            )}
+            onChange={(_, option) => getCargo(option)}
+            isOptionEqualToValue={(option, value) =>
+              option.title === value.title
+            }
+          /> */}
         </StyledFilters>
 
         {/* Table */}

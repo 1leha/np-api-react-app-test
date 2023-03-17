@@ -2,6 +2,7 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchCities } from './cityOperations';
+import { message } from 'utils/messages';
 
 const persistConfig = {
   key: 'city',
@@ -32,7 +33,7 @@ const citySlice = createSlice({
         }));
         // console.log('allCities :>> ', allCities[1313]);
         state.items = [
-          { Ref: 'all', Description: 'Усі відділення...' },
+          { Ref: 'all', Description: message.allPostOffices },
           ...allCities,
         ];
         state.isLoading = false;

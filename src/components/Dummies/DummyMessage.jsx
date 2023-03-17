@@ -10,7 +10,7 @@ const DummyMessage = ({ children }) => {
     <Paper
       elevation={3}
       sx={{
-        flex: tablet || desktop ? '1 1 70%' : '1 1 auto',
+        flex: tablet || desktop ? '0 0 50%' : '0 0 30%',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

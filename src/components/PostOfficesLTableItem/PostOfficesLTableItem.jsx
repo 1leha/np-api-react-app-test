@@ -16,7 +16,7 @@ const PostOfficesLTableItem = ({ data }) => {
           {data?.SettlementTypeDescription} {data?.CityDescription}
         </StyledItem>
         <StyledItem>{data?.Description}</StyledItem>
-        <StyledItem>{data?.Phone}</StyledItem>
+        <StyledItem>Телефон: {data?.Phone}</StyledItem>
       </StyledItemDataWrapper>
     </StyledItemWrapper>
   );

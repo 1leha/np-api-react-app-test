@@ -1,3 +1,6 @@
 export const message = {
   noPostOfficeData: 'Немає данних по відділенню...',
+  allPostOffices: 'Усі відділення...',
+  cargoCapasity: 'Вантажоємність',
+  search: 'Шукати...',
 };

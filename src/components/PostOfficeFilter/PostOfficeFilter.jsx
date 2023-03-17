@@ -1,31 +1,36 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import debounce from 'lodash.debounce';
 
 // // Redux
 import { useDispatch, useSelector } from 'react-redux';
 
 import SearchIcon from '@mui/icons-material/Search';
-
-// icons
-
 //components
 import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
 } from './PostOfficeFilter.styled';
+import { setSearchString } from 'redux/postOffices/postOfficeSlice';
+import { sellectSearchString } from 'redux/postOffices/postOfficeSellectors';
+import { message } from 'utils/messages';
+
+// icons
 
 const PostOfficeFilter = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const filter = useSelector(sellectTtnFilter);
+  const searchString = useSelector(sellectSearchString);
 
   // Filter methods
-  // const handleChangeFilter = e => {
-  //   if (e.target.value.length > 14 || Number.isNaN(+e.target.value)) {
-  //     return;
-  //   }
-  //   dispatch(inputFilterTtn(e.target.value));
-  // };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedDispatch = useCallback(
+    debounce(dispatch, 50, { trailing: true }),
+    []
+  );
+  const handleChangeFilter = e => {
+    debouncedDispatch(setSearchString(e.target.value));
+  };
 
   return (
     <Search>
@@ -33,10 +38,10 @@ const PostOfficeFilter = () => {
         <SearchIcon />
       </SearchIconWrapper>
       <StyledInputBase
-        placeholder="Search…"
+        placeholder={message.search}
         inputProps={{ 'aria-label': 'search' }}
-        // value={filter}
-        // onChange={handleChangeFilter}
+        value={searchString}
+        onChange={handleChangeFilter}
       />
     </Search>
   );

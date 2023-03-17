@@ -14,13 +14,11 @@ import PostOfficesLTableItem from 'components/PostOfficesLTableItem';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   sellectCityRef,
-  sellectCurrentQuery,
-  sellectPage,
   sellectPostOffice,
+  sellectSortedPostOffice,
   sellectTotalHits,
 } from 'redux/postOffices/postOfficeSellectors';
 import { setServerPage } from 'redux/postOffices/postOfficeSlice';
-import { fetchPostOffice } from 'redux/postOffices/postOfficeOperations';
 
 const columns = [{ id: 'name', label: 'Назва', minWidth: 420 }];
 
@@ -33,50 +31,20 @@ const PostOfficesLTable = () => {
 
   const dispatch = useDispatch();
   const postOffices = useSelector(sellectPostOffice);
-  // console.log('postOffices :>> ', postOffices);
+  const sortedPostOffices = useSelector(sellectSortedPostOffice);
+
+  console.log('sortedPostOffices :>> ', sortedPostOffices);
 
   const totalHits = useSelector(sellectTotalHits);
   const cityRef = useSelector(sellectCityRef);
 
-  // useEffect(() => {
-  //   if (serverPage === 1) {
-  //     setActualPostOffices(postOffices);
-  //   }
-  //   setActualPostOffices(prevState => {
-  //     // console.log('prevState :>> ', prevState);
-  //     // console.log('postOffices :>> ', postOffices);
-  //     return [...prevState, ...postOffices];
-  //   });
-  // }, [serverPage, postOffices]);
-
-  // useEffect(() => {
-  //   console.log('useEffect totalHits :>> ', totalHits);
-  //   setActualPostOffices([]);
-  // }, [totalHits]);
-
-  // console.log('actualPostOffices :>> ', actualPostOffices);
-
+  // Reset pages if new City select
   useEffect(() => {
     setPage(0);
     dispatch(setServerPage(1));
   }, [cityRef, dispatch]);
 
-  // console.log('currentQuery :>> ', currentQuery);
-
   const handleChangePage = (event, newPage) => {
-    // console.log('page :>> ', page);
-    // console.log('newPage :>> ', newPage);
-
-    // console.log(
-    //   'needToLoad :>> ',
-    //   postOffices.length / rowsPerPage === page + 1
-    // );
-    console.log('===================================');
-    console.log('postOffices.length :>> ', postOffices.length);
-    console.log('rowsPerPage :>> ', rowsPerPage);
-    console.log('page + 1 :>> ', page + 1);
-    console.log('===================================');
-
     const isLoadNextPostOffices = postOffices.length / rowsPerPage === page + 1;
     if (isLoadNextPostOffices) {
       console.log('inrice page');
@@ -95,26 +63,15 @@ const PostOfficesLTable = () => {
     setActualPostId(id);
   };
 
+  const offices = sortedPostOffices ? sortedPostOffices : postOffices;
+
   return (
     <>
       <Paper sx={{ width: '100%' }}>
         <TableContainer sx={{ height: '100vh' }}>
           <Table stickyHeader aria-label="sticky table">
-            {/* <TableHead>
-            <TableRow>
-              {columns.map(column => (
-                <TableCell
-                  key={column.id}
-                  //   align={column.align}
-                  style={{ top: 0, minWidth: 20 }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead> */}
             <TableBody>
-              {postOffices
+              {offices
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map(row => {
                   return (

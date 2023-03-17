@@ -7,9 +7,9 @@ const initialPostOffice = {
   error: null,
   hitsPerPage: 10,
   totalHits: 0,
+  cargoCapacity: 0,
   currentQuery: {
     page: 1,
-    cargoCapacity: 0,
     cityRef: '',
     searchString: '',
   },
@@ -32,7 +32,7 @@ const postOfficeSlice = createSlice({
     },
 
     setcargoCapacity(state, { payload }) {
-      state.currentQuery.cargoCapacity = payload;
+      state.cargoCapacity = payload;
     },
   },
 
@@ -47,7 +47,7 @@ const postOfficeSlice = createSlice({
         const totalCount = payload.info.totalCount;
 
         if (totalCount === state.totalHits) {
-          console.log('totalCount :>> ', totalCount);
+          // console.log('totalCount :>> ', totalCount);
           state.items.push(...payload.data);
           return;
         }
