@@ -69,9 +69,9 @@ const PostOfficesLTable = () => {
 
   return (
     <>
-      <Paper sx={{ width: '100%' }}>
-        <TableContainer sx={{ height: '100vh' }}>
-          <Table stickyHeader aria-label="sticky table">
+      <Paper sx={{ width: '100%', height: '104ch' }}>
+        <TableContainer sx={{ width: '100%', height: '98ch' }}>
+          <Table aria-label="sticky table">
             <TableBody>
               {postOffices.map(row => {
                 return (
@@ -95,6 +95,7 @@ const PostOfficesLTable = () => {
           </Table>
         </TableContainer>
         <TablePagination
+          sx={{ p: 0 }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={totalHits}

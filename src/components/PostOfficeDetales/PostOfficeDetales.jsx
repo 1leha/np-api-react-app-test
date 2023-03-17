@@ -1,11 +1,9 @@
 import { Paper, Typography } from '@mui/material';
-import DummyMessage from 'components/Dummies/DummyMessage';
 import { useCustomQueries } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { sellectPostOffice } from 'redux/postOffices/postOfficeSellectors';
-import { message } from 'utils/messages';
 import {
   StyledCityType,
   StyledDetales,
@@ -28,11 +26,8 @@ import {
 
 const PostOfficeDetales = () => {
   const [sellectedPostOffice, setSellectedPostOffice] = useState(null);
-
   const { officeId } = useParams();
-
   const postOffices = useSelector(sellectPostOffice);
-
   const { tablet, desktop } = useCustomQueries();
 
   const [activePostOffice] = postOffices.filter(
