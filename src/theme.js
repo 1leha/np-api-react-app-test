@@ -14,6 +14,8 @@ export const theme = {
     primaryAccent: '#3E3E3E99',
 
     secondary: 'white',
+    third: '#008BD1',
+
     brandColor: '#D00000',
 
     // fourth: '#1976d2',

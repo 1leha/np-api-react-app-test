@@ -106,22 +106,6 @@ const PostOfficesPage = () => {
             }}
             onChange={(_, newCity) => getCity(newCity)}
           />
-
-          {/* <Autocomplete
-            disablePortal
-            autoComplete
-            clearOnEscape
-            id="loadCapacity"
-            value={loadCapacity}
-            options={CARGO_LOAD}
-            renderInput={params => (
-              <TextField {...params} label={message.cargoCapasity} />
-            )}
-            onChange={(_, option) => getCargo(option)}
-            isOptionEqualToValue={(option, value) =>
-              option.title === value.title
-            }
-          /> */}
         </StyledFilters>
 
         {/* Table */}

@@ -36,15 +36,6 @@ export default function MapModal({ postId, setActualPostId }) {
 
   return (
     <>
-      {/* <Button
-        fullWidth
-        variant="outlined"
-        onClick={handleClickOpen}
-        size="large"
-        sx={{ height: '56px' }}
-      >
-        Історія ТТН
-      </Button> */}
       <Dialog
         fullScreen
         open={open}

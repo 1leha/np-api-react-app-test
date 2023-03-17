@@ -3,4 +3,5 @@ export const message = {
   allPostOffices: 'Усі відділення...',
   cargoCapasity: 'Вантажоємність',
   search: 'Шукати...',
+  historyIsEmpty: 'Історія відсутня...',
 };
