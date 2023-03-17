@@ -42,10 +42,10 @@ const PostOfficesLTable = () => {
   const cityRef = useSelector(sellectCityRef);
 
   // Reset pages if new City select
-  // useEffect(() => {
-  //   setPage(0);
-  //   dispatch(setServerPage(1));
-  // }, [cityRef, dispatch]);
+  useEffect(() => {
+    setPage(0);
+    dispatch(setServerPage(1));
+  }, [cityRef, dispatch]);
 
   const handleChangePage = (event, newPage) => {
     const isLoadNextPostOffices = postOffices.length / rowsPerPage === page + 1;

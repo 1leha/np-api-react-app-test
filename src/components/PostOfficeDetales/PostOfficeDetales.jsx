@@ -3,7 +3,7 @@ import DummyMessage from 'components/Dummies';
 import { useCustomQueries } from 'hooks';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import {
   sellectPostOffice,
   sellectSortedPostOffice,
@@ -36,34 +36,41 @@ const PostOfficeDetales = () => {
     Latitude: '50.498109000000000',
   };
   const { officeId } = useParams();
+  const navigate = useNavigate();
 
   const postOffices = useSelector(sellectPostOffice);
-
-  const [
-    {
-      Number,
-      WarehouseStatus,
-      SettlementTypeDescription,
-      CityDescription,
-      SettlementAreaDescription,
-      Description,
-      TotalMaxWeightAllowed,
-      Phone,
-      Reception: {
-        Monday,
-        Tuesday,
-        Wednesday,
-        Thursday,
-        Friday,
-        Saturday,
-        Sunday,
-      },
-      Longitude,
-      Latitude,
-    },
-  ] = postOffices.filter(office => office.Ref === officeId);
-
   const { tablet, desktop } = useCustomQueries();
+
+  const [activePostOffice] = postOffices.filter(
+    office => office.Ref === officeId
+  );
+
+  if (!activePostOffice) {
+    navigate('/post-office');
+    return;
+  }
+
+  const {
+    Number,
+    WarehouseStatus,
+    SettlementTypeDescription,
+    CityDescription,
+    SettlementAreaDescription,
+    Description,
+    TotalMaxWeightAllowed,
+    Phone,
+    Reception: {
+      Monday,
+      Tuesday,
+      Wednesday,
+      Thursday,
+      Friday,
+      Saturday,
+      Sunday,
+    },
+    Longitude,
+    Latitude,
+  } = activePostOffice;
 
   return (
     <Paper

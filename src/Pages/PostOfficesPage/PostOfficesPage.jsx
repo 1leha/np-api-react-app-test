@@ -31,9 +31,8 @@ const PostOfficesPage = () => {
 
   const navigate = useNavigate();
 
-  console.log('currentQuery :>> ', currentQuery);
+  // console.log('currentQuery :>> ', currentQuery);
   useEffect(() => {
-    navigate('/post-office');
     dispatch(fetchPostOffice(currentQuery));
   }, [currentQuery, dispatch]);
 
