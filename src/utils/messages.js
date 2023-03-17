@@ -4,4 +4,5 @@ export const message = {
   cargoCapasity: 'Вантажоємність',
   search: 'Шукати...',
   historyIsEmpty: 'Історія відсутня...',
+  noSearchData: 'Нічого не знайдено...',
 };

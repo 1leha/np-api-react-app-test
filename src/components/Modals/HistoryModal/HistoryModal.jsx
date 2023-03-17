@@ -28,7 +28,6 @@ export default function FullScreenDialog() {
   const handleClearAll = () => {
     setOpen(false);
   };
-
   return (
     <>
       <Button

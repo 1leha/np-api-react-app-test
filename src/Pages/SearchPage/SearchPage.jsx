@@ -9,20 +9,18 @@ import {
   Paper,
   TextField,
   Typography,
-  useMediaQuery,
 } from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { useForm } from 'react-hook-form';
 import { ttnRegExp } from 'utils/options';
 import HistoryModal from 'components/Modals/HistoryModal';
 import { StyledSearchPage, StyledSearchPageResults } from './SearchPage.styled';
-// import Status from 'components/Status';
 import History from 'components/History';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTtn } from 'redux/ttn/ttnOperations';
 import { Outlet, useNavigate, useParams } from 'react-router';
 import { sellectIsTtnListEmpty } from 'redux/ttn/ttnSellectors';
-// import PropTypes from 'prop-types';
+import { useCustomQueries } from 'hooks';
 
 const SearchPage = () => {
   const [ttnValue, setTtnValue] = useState('');
@@ -38,8 +36,6 @@ const SearchPage = () => {
   const dispatch = useDispatch();
   const { ttnId } = useParams();
 
-  console.log('ttnId :>> ', ttnId);
-
   useEffect(() => {
     ttnId && setTtnValue(ttnId);
 
@@ -51,9 +47,7 @@ const SearchPage = () => {
 
   const navigate = useNavigate();
 
-  const mobile = useMediaQuery('(max-width:767px)');
-  const tablet = useMediaQuery('(min-width:768px)');
-  const desktop = useMediaQuery('(min-width:1200px)');
+  const { mobile, tablet, desktop } = useCustomQueries();
 
   const onReset = () => {
     setTtnValue('');
@@ -149,7 +143,6 @@ const SearchPage = () => {
         <Divider />
 
         {/* Result */}
-
         {/* <Status /> */}
         <Paper sx={{ mt: 3, p: 2 }}>
           {ttnId && !isTtnListEmpty ? (
@@ -177,7 +170,5 @@ const SearchPage = () => {
     </StyledSearchPage>
   );
 };
-
-// Search.propTypes = {};
 
 export default SearchPage;
