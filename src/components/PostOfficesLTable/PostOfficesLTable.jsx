@@ -1,5 +1,4 @@
-import React from 'react';
-// import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,53 +10,61 @@ import MapModal from 'components/Modals/MapModal';
 import { useCustomQueries } from 'hooks';
 
 import PostOfficesLTableItem from 'components/PostOfficesLTableItem';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  sellectCityRef,
+  sellectPostOffice,
+  sellectTotalHits,
+} from 'redux/postOffices/postOfficeSellectors';
+import {
+  setHitsPerPage,
+  setServerPage,
+} from 'redux/postOffices/postOfficeSlice';
+import { useNavigate } from 'react-router-dom';
 
 const columns = [{ id: 'name', label: 'Назва', minWidth: 420 }];
 
-function createData(number, name, adress, cargo) {
-  return { number, name, adress, cargo };
-}
+const PostOfficesLTable = () => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [actualPostId, setActualPostId] = useState(null);
 
-const rows = [
-  createData(1, 'Київ', 'Адресса 1', 'до 30 кг'),
-  createData(2, 'Київ', 'Адресса 2', 'до 30 кг'),
-  createData(3, 'Київ', 'Адресса 3', 'до 30 кг'),
-  createData(4, 'Київ', 'Адресса 4', 'до 30 кг'),
-  createData(5, 'Київ', 'Адресса 5', 'до 30 кг'),
-  createData(6, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(7, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(8, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(9, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(10, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(11, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(12, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(13, 'Київ', 'Адресса 6', 'до 30 кг'),
-  createData(14, 'Київ', 'Адресса 6', 'до 30 кг'),
-];
+  const { mobile } = useCustomQueries();
 
-const PostOfficesLTable = props => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [actualPostId, setActualPostId] = React.useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { mobile, tablet, desktop } = useCustomQueries();
+  const postOffices = useSelector(sellectPostOffice);
+  const totalHits = useSelector(sellectTotalHits);
+  const cityRef = useSelector(sellectCityRef);
 
-  const handleChangePage = (event, newPage) => {
+  console.log('page :>> ', page);
+
+  // Effect page changing
+  useEffect(() => {
+    dispatch(setServerPage(page + 1));
+  }, [page, dispatch]);
+
+  // Effect reset pages if new City select
+  useEffect(() => {
+    setPage(0);
+    dispatch(setServerPage(1));
+  }, [cityRef, dispatch]);
+
+  const handleChangePage = (_, newPage) => {
     setPage(newPage);
   };
 
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(+event.target.value);
+  const handleChangeRowsPerPage = e => {
+    const hitsPerPage = +e.target.value;
+    setRowsPerPage(hitsPerPage);
+    dispatch(setHitsPerPage(hitsPerPage));
     setPage(0);
   };
 
-  // const setPostId = () => {
-  //   return actualPostId;
-  // };
-
-  const handleGetPostOfficeDedeles = id => {
-    console.log('id :>> ', id);
-    setActualPostId(id);
+  const handleGetPostOfficeDetales = ({ Ref, Number }) => {
+    setActualPostId(Number);
+    navigate(`/post-office/${Ref}`);
   };
 
   return (
@@ -65,63 +72,44 @@ const PostOfficesLTable = props => {
       <Paper sx={{ width: '100%' }}>
         <TableContainer sx={{ height: '100vh' }}>
           <Table stickyHeader aria-label="sticky table">
-            {/* <TableHead>
-            <TableRow>
-              {columns.map(column => (
-                <TableCell
-                  key={column.id}
-                  //   align={column.align}
-                  style={{ top: 0, minWidth: 20 }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead> */}
             <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(row => {
-                  return (
-                    <TableRow hover key={row.number}>
-                      {columns.map(column => {
-                        return (
-                          <TableCell
-                            key={column.id}
-                            align={column.align}
-                            sx={{ p: 0 }}
-                            onClick={() =>
-                              handleGetPostOfficeDedeles(row.number)
-                            }
-                          >
-                            <PostOfficesLTableItem data={row} />
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
+              {postOffices.map(row => {
+                return (
+                  <TableRow hover key={row.Ref}>
+                    {columns.map(column => {
+                      return (
+                        <TableCell
+                          key={column.id}
+                          align={column.align}
+                          sx={{ p: 0 }}
+                          onClick={() => handleGetPostOfficeDetales(row)}
+                        >
+                          <PostOfficesLTableItem data={row} />
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={rows.length}
+          count={totalHits}
           rowsPerPage={rowsPerPage}
           page={page}
           labelRowsPerPage=""
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
+        {mobile && (
+          <MapModal postId={actualPostId} setActualPostId={setActualPostId} />
+        )}
       </Paper>
-      {mobile && (
-        <MapModal postId={actualPostId} setActualPostId={setActualPostId} />
-      )}
     </>
   );
 };
-
-// PostOfficesLTable.propTypes = {};
 
 export default PostOfficesLTable;

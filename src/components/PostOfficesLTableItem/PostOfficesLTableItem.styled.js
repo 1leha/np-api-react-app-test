@@ -25,7 +25,7 @@ export const StyledPostNumber = styled.p`
 export const StyledItemDataWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${p => p.theme.space[1]}px;
+  gap: ${p => p.theme.space[3]}px;
 
   padding-top: ${p => p.theme.space[3]}px;
   padding-bottom: ${p => p.theme.space[3]}px;
@@ -34,7 +34,6 @@ export const StyledItemDataWrapper = styled.div`
 export const StyledItem = styled.div`
   display: flex;
   align-items: center;
-  gap: ${p => p.theme.space[1]}px;
 
   margin: ${p => p.theme.space[0]}px;
 `;

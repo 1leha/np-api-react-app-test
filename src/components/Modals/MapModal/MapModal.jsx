@@ -1,17 +1,7 @@
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 
 import Slide from '@mui/material/Slide';
-import { useSelector } from 'react-redux';
-import { sellectIsTtnListEmpty } from 'redux/ttn/ttnSellectors';
-import {
-  AppBar,
-  IconButton,
-  // Paper,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-} from '@mui/material';
+import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import { forwardRef, useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import PostOfficeDetales from 'components/PostOfficeDetales';
@@ -31,7 +21,7 @@ export default function MapModal({ postId, setActualPostId }) {
   }, [postId]);
 
   // media queries
-  const { mobile, tablet, desktop } = useCustomQueries();
+  const { mobile } = useCustomQueries();
 
   // const handleClickOpen = () => {
   //   setOpen(true);
