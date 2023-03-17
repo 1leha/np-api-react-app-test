@@ -66,7 +66,7 @@ const PostOfficeDetales = () => {
 
   return (
     <Paper
-      elevation={3}
+      elevation={0}
       sx={{ pb: 0, flex: tablet || desktop ? '1 1 50%' : '1 1 auto' }}
     >
       {sellectedPostOffice && (
