@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   sellectCityRef,
   sellectPostOffice,
+  sellectSearchString,
   sellectTotalHits,
 } from 'redux/postOffices/postOfficeSellectors';
 import {
@@ -37,8 +38,7 @@ const PostOfficesLTable = () => {
   const postOffices = useSelector(sellectPostOffice);
   const totalHits = useSelector(sellectTotalHits);
   const cityRef = useSelector(sellectCityRef);
-
-  console.log('page :>> ', page);
+  const searchString = useSelector(sellectSearchString);
 
   // Effect page changing
   useEffect(() => {
@@ -49,7 +49,7 @@ const PostOfficesLTable = () => {
   useEffect(() => {
     setPage(0);
     dispatch(setServerPage(1));
-  }, [cityRef, dispatch]);
+  }, [cityRef, searchString, dispatch]);
 
   const handleChangePage = (_, newPage) => {
     setPage(newPage);
