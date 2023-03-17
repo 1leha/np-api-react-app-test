@@ -27,9 +27,7 @@ export const fetchTtn = createAsyncThunk(
     };
 
     try {
-      // console.log('axiosTtnConfig :>> ', axiosTtnConfig);
       const response = await ttnApi(axiosTtnConfig);
-      // console.log('fetchTtn response :>> ', await response.data.data[0]);
       return await response.data.data[0];
     } catch (error) {
       console.log('error :>> ', error);

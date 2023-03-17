@@ -11,11 +11,7 @@ export const StyledMain = styled.main`
 
 export const StyledMainContent = styled.div`
   display: block;
-  /* height: 50vh; */
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-
-  /* border: solid 3px; */
-  /* background-color: tomato; */
 `;

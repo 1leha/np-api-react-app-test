@@ -4,11 +4,7 @@ export const StyledSearchPage = styled.div`
   display: flex;
   flex-direction: ${p => (p.mediaQuery ? 'row' : 'column')};
   justify-content: space-between;
-  /* width: 100%; */
   gap: ${p => p.theme.space[5]}px;
-
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;
 
 export const StyledSearchPageResults = styled.div`
@@ -22,7 +18,4 @@ export const StyledSearchPageResults = styled.div`
   @media screen and (min-width: 1200px) {
     flex: 1 1 80%;
   }
-
-  /* background-color: tomato; */
-  /* border: 3px solid red; */
 `;

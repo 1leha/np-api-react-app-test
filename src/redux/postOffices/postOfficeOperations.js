@@ -30,7 +30,6 @@ export const fetchPostOffice = createAsyncThunk(
 
     try {
       const response = await postOfficeApi(axiospostOfficeConfig);
-      // console.log('fetchPostOffice response :>> ', response.data);
       return await response.data;
     } catch (error) {
       console.log('error :>> ', error);

@@ -3,7 +3,7 @@ import DummyMessage from 'components/Dummies/DummyMessage';
 import PostOfficeFilter from 'components/PostOfficeFilter';
 import PostOfficesLTable from 'components/PostOfficesLTable';
 import { useCustomQueries } from 'hooks';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchCities } from 'redux/postOffices/City/cityOperations';
@@ -17,9 +17,6 @@ import { StyledFilters, StyledPostOfficesPage } from './PostOfficesPage.styled';
 import CircularProgress from '@mui/material/CircularProgress';
 import { fetchPostOffice } from 'redux/postOffices/postOfficeOperations';
 import { setCityRef } from 'redux/postOffices/postOfficeSlice';
-import { FullscreenSpiner } from 'components/common/Spiners/Spiner';
-
-// import PropTypes from 'prop-types'
 
 const PostOfficesPage = () => {
   const [city, setCity] = useState(null);
@@ -76,7 +73,6 @@ const PostOfficesPage = () => {
               label: Description,
             }))}
             renderOption={(props, option) => {
-              // console.log(option);
               return (
                 <Box component="li" {...props} key={option.Ref}>
                   {option.label}
@@ -114,7 +110,7 @@ const PostOfficesPage = () => {
       </Paper>
 
       {/* Post Detales */}
-      <Paper elevation={3} sx={{ flex: desktop ? '1 1 70%' : '1 1 50%', p: 0 }}>
+      <Paper elevation={3} sx={{ flex: desktop ? '1 1 65%' : '1 1 50%', p: 0 }}>
         {!mobile &&
           (officeId ? (
             <Outlet />
@@ -125,7 +121,5 @@ const PostOfficesPage = () => {
     </StyledPostOfficesPage>
   );
 };
-
-// PostOffices.propTypes = {}
 
 export default PostOfficesPage;

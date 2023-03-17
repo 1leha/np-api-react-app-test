@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-
 import {
   Box,
   Button,
@@ -90,7 +89,6 @@ const SearchPage = () => {
               required
               id="ttn"
               name="ttn"
-              // type="number"
               label="Введіть ТТН"
               variant="outlined"
               value={ttnValue}
@@ -143,7 +141,6 @@ const SearchPage = () => {
         <Divider />
 
         {/* Result */}
-        {/* <Status /> */}
         <Paper sx={{ mt: 3, p: 2 }}>
           {ttnId && !isTtnListEmpty ? (
             <Outlet />

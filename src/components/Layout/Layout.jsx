@@ -5,8 +5,6 @@ import Main from 'components/Main';
 import React, { Suspense } from 'react';
 import { Outlet } from 'react-router';
 
-// import PropTypes from 'prop-types'
-
 const Layout = () => {
   return (
     <Box width="100%">
@@ -30,7 +28,5 @@ const Layout = () => {
     </Box>
   );
 };
-
-// Layout.propTypes = {}
 
 export default Layout;

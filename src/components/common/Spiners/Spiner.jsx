@@ -34,8 +34,6 @@ export const LocaleSpiner = () => {
   return (
     <Box
       sx={{
-        // width: '100vw',
-        // height: '100vh',
         display: 'inline-block',
         alignItems: 'center',
         textAlign: 'right',

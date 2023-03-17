@@ -3,7 +3,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { sellectCurrentTtn } from 'redux/ttn/ttnSellectors';
 import { StyledStatus } from './Status.styled';
-// import PropTypes from 'prop-types'
 
 const Status = () => {
   const ttnData = useSelector(sellectCurrentTtn);
@@ -28,7 +27,5 @@ const Status = () => {
     </StyledStatus>
   );
 };
-
-// Status.propTypes = {}
 
 export default Status;

@@ -26,12 +26,10 @@ const citySlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchCities.fulfilled, (state, { payload }) => {
-        // console.log('payload :>> ', payload);
         const allCities = payload.map(({ Ref, Description }) => ({
           Ref,
           Description,
         }));
-        // console.log('allCities :>> ', allCities[1313]);
         state.items = [
           { Ref: 'all', Description: message.allPostOffices },
           ...allCities,
