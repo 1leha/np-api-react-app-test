@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+
 import {
   Divider,
   IconButton,
@@ -25,15 +27,6 @@ const TtnItem = ({
   data: { Number, requestDate, Status, RecipientDateTime, StatusCode },
   onClose,
 }) => {
-  //   console.log('Number :>> ==================================');
-  //   console.log('Number :>> ', Number);
-  //   console.log('requestDate :>> ', requestDate);
-  //   console.log('Status :>> ', Status);
-  //   console.log('RecipientDateTime :>> ', RecipientDateTime);
-  //   console.log('StatusCode :>> ', StatusCode);
-  //   console.log('onClose :>> ', onClose);
-  //   console.log('Number :>> ==================================');
-
   const [ttnStatusColor, setTtnStatusColor] = useState('');
 
   useEffect(() => {
@@ -94,6 +87,7 @@ const TtnItem = ({
     e.stopPropagation();
 
     dispatch(removeTtn(ttn));
+    navigate(`/check`, { replace: true });
   };
 
   const handleCheck = ttn => {
@@ -104,7 +98,7 @@ const TtnItem = ({
   };
 
   return (
-    <li key={Number}>
+    <>
       <ListItem
         sx={{
           background: ttnStatusColor,
@@ -140,16 +134,17 @@ const TtnItem = ({
         </HtmlTooltip>
       </ListItem>
       <Divider />
-    </li>
+    </>
   );
 };
 
-// TtnItem.propTypes = {
-//   Number,
-//   requestDate,
-//   Status,
-//   RecipientDateTime,
-//   StatusCode,
-// };
+TtnItem.propTypes = {
+  Number: PropTypes.string,
+  requestDate: PropTypes.string,
+  Status: PropTypes.string,
+  RecipientDateTime: PropTypes.string,
+  StatusCode: PropTypes.string,
+  onClose: PropTypes.func,
+};
 
 export default TtnItem;

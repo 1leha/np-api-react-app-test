@@ -1,17 +1,14 @@
 import React from 'react';
 import { List, Paper } from '@mui/material';
-
 import { StyledTtnList } from './TtnList.styled';
 import { useSelector } from 'react-redux';
 import {
   sellectFiltredTtn,
   sellectIsFilteredTtnListEmpty,
 } from 'redux/ttn/ttnSellectors';
-
 import { message } from 'utils/messages';
 import TtnItem from './TtnItem';
-
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 const TtnList = ({ onClose }) => {
   const filteredTtnList = useSelector(sellectFiltredTtn);
@@ -32,6 +29,6 @@ const TtnList = ({ onClose }) => {
   );
 };
 
-// TtnList.propTypes = { onClose: PropTypes.func };
+TtnList.propTypes = { onClose: PropTypes.func };
 
 export default TtnList;
