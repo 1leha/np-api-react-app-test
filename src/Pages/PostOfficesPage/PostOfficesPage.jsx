@@ -49,7 +49,7 @@ const PostOfficesPage = () => {
       {/* Post Filrer */}
       <Paper
         elevation={3}
-        sx={{ flex: desktop ? '1 1 35%' : '1 1 50%', p: 2, height: '100%' }}
+        sx={{ flex: desktop ? '1 1 35%' : '1 1 50%', p: '2' }}
       >
         {/* Filrer */}
         <StyledFilters>

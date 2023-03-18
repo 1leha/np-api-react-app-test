@@ -9,10 +9,12 @@ const Status = () => {
 
   return (
     <StyledStatus>
-      <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
+      <Typography sx={{ mt: 0, mb: 2 }} variant="h1" component="div">
         Інформація про відправлення
       </Typography>
+
       <Divider sx={{ mb: 2 }} />
+
       {ttnData.StatusCode !== '3' ? (
         <>
           <p>Статус доставки: {ttnData.Status}</p>

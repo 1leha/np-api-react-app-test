@@ -5,6 +5,8 @@ export const StyledPostOfficesPage = styled.div`
   flex-direction: ${p => (p.mediaQuery ? 'row' : 'column')};
   justify-content: space-between;
   gap: ${p => p.theme.space[4]}px;
+
+  height: 100vmin;
 `;
 
 export const StyledFilters = styled.div`
