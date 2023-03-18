@@ -12,7 +12,7 @@ export const StyledHeader = styled.header`
     border-bottom: none;
   }
 
-  border: solid 3px black;
+  /* border: solid 3px black; */
 `;
 
 export const StyledHeaderNav = styled.nav`

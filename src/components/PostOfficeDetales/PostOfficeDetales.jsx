@@ -67,7 +67,11 @@ const PostOfficeDetales = () => {
   return (
     <Paper
       elevation={0}
-      sx={{ pb: 0, flex: tablet || desktop ? '1 1 50%' : '1 1 auto' }}
+      sx={{
+        pb: 0,
+        flex: tablet || desktop ? '1 1 50%' : '1 1 auto',
+        height: '100%',
+      }}
     >
       {sellectedPostOffice && (
         <StyledPostOfficeDetalesWrapper mobile>
@@ -85,7 +89,7 @@ const PostOfficeDetales = () => {
 
               <StyledOfficeDescriptionWrapper>
                 <p>
-                  <StyledCityType>{SettlementTypeDescription}</StyledCityType>{' '}
+                  <StyledCityType>{SettlementTypeDescription}</StyledCityType>
                   {CityDescription}
                 </p>
                 <p>{SettlementAreaDescription}</p>

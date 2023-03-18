@@ -76,9 +76,9 @@ const PostOfficesLTable = () => {
         <FullscreenSpiner />
       ) : (
         <Paper sx={{ width: '100%' }}>
-          <TableContainer sx={{ width: '100%' }}>
-            <Table aria-label="sticky table">
-              <TableBody>
+          <TableContainer sx={{ height: '74vh' }}>
+            <Table aria-label="sticky table" sx={{ height: '100%' }}>
+              <TableBody sx={{ height: '100%' }}>
                 {postOffices.map(row => {
                   return (
                     <TableRow hover key={row.Ref}>
