@@ -90,6 +90,7 @@ const PostOfficeDetales = () => {
               <StyledOfficeDescriptionWrapper>
                 <p>
                   <StyledCityType>{SettlementTypeDescription}</StyledCityType>
+                  {'  '}
                   {CityDescription}
                 </p>
                 <p>{SettlementAreaDescription}</p>

@@ -27,3 +27,13 @@ export const StyledFooterContent = styled.p`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const StyledLink = styled.a`
+  text-decoration: none;
+  color: ${p => p.theme.colors.secondary};
+
+  &:hover,
+  &:focus {
+    color: ${p => p.theme.colors.hoverTab};
+  }
+`;

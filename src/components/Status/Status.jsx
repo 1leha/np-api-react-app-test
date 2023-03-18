@@ -9,7 +9,7 @@ const Status = () => {
 
   return (
     <StyledStatus>
-      <Typography sx={{ mt: 0, mb: 2 }} variant="h1" component="div">
+      <Typography sx={{ mt: 0, mb: 2 }} variant="h6" component="div">
         Інформація про відправлення
       </Typography>
 
