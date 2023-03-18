@@ -48,8 +48,14 @@ const PostOfficesPage = () => {
     <StyledPostOfficesPage mediaQuery={tablet || desktop}>
       {/* Post Filrer */}
       <Paper
-        elevation={3}
-        sx={{ flex: desktop ? '1 1 35%' : '1 1 50%', p: '2' }}
+        elevation={0}
+        sx={{
+          flex: desktop ? '1 1 35%' : '1 1 50%',
+          p: '2',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        }}
       >
         {/* Filrer */}
         <StyledFilters>
